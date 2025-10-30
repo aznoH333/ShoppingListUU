@@ -6,6 +6,7 @@ import {useState} from "react";
 import {ShoppingList} from "@/src/types/ShoppingList";
 import {useSearchParams} from "next/navigation";
 import {useLoggedInUser} from "@/src/hooks/users/useLoggedInUser";
+import {ListControls} from "@/src/modules/list/listControls/ListControls";
 
 
 interface ListOverviewPage {
@@ -23,18 +24,14 @@ export default function ListOverviewPage({params}: ListOverviewPage) {
 
 
 
-    if (!list) {
+    if (!list || !user) {
         return <Card>
             loading...
         </Card>
     }
 
 
-    return <Card>
-        <div>
-            {list.name}
-
-            test
-        </div>
-    </Card>;
+    return <div>
+        <ListControls loggedInUser={user} list={list} updateList={updateList}/>
+    </div>;
 }
