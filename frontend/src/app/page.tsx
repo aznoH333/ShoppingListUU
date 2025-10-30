@@ -5,7 +5,7 @@ export default function Home() {
     <div>
       todo
 
-        <a></a>
+        <a href={"/list/0"}>go to debug list</a>
     </div>
   );
 }
