@@ -1,4 +1,4 @@
-import {Button} from "@/src/modules/button/Button";
+import {Button} from "@/src/modules/input/button/Button";
 import styles from "./Modal.module.css"
 import React from "react";
 

@@ -1,0 +1,36 @@
+.card {
+    background-color: var(--background);
+    border: 1px solid var(--color-muted);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    overflow: hidden;
+
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.name {
+    font-size: 16px;
+    color: var(--color-text);
+}
+
+.role {
+    font-size: 14px;
+    color: var(--color-text);
+    background-color: #cccccc;
+    border-radius: 4px;
+    padding: 2px 0;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+}
