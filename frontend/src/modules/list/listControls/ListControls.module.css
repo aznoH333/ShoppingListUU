@@ -1,4 +1,31 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .title {
     font-size: 1.2rem;
     color: var(--color-foreground);
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+}
+
+.titleName {
+    color: var(--color-primary);
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .titleHint {
+        display: none;
+    }
+}
+
+
+.headerButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 }

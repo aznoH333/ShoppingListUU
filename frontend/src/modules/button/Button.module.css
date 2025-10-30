@@ -1,0 +1,19 @@
+.button {
+    border-radius: 5px;
+    padding: 5px;
+    border-style: none;
+    min-width: 4rem;
+}
+
+.active {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    cursor: pointer;
+
+}
+
+.disabled {
+    background-color: var(--color-background);
+    color: var(--color-muted)
+}
+
