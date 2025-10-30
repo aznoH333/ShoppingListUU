@@ -1,27 +1,26 @@
 .card {
-    background-color: var(--background);
-    border: 1px solid var(--color-muted);
+    background-color: var(--background-2);
     border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 16px;
-    margin-bottom: 10px;
     transition: background-color 0.3s;
 }
 
 .visible {
-    opacity: 1;
 }
 
 .checked {
-    background-color: var(--color-muted);
-    opacity: 0.6; /* Muted appearance when checked */
+    background-color: var(--color-muted-2);
 }
 
 .info {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .name {

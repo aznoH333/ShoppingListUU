@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ShoppingListItem.module.css';
+import styles from './ListItem.module.css';
 import {Button} from "@/src/modules/input/button/Button";
 
 export interface ShoppingListItem {
@@ -19,7 +19,7 @@ export function ListItem({ listItem, checkButtonClicked }: ShoppingListItemProps
         <div className={`${styles.card} ${listItem.state === "checked" ? styles.checked : styles.visible}`}>
             <div className={styles.info}>
                 <div className={styles.name}>{listItem.name}</div>
-                <div className={styles.quantity}>{listItem.quantity}</div>
+                <div className={styles.quantity}>{listItem.quantity}x</div>
             </div>
             <Button onClick={()=>{checkButtonClicked(listItem.id)}}>
                 {listItem.state === "checked" ? "Revert" : "Done"}

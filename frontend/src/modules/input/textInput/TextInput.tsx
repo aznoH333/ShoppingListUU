@@ -18,8 +18,7 @@ export function TextInput({value, setValue, label}: TextInputProps) {
             type="text"
             value={value}
             onChange={handleChange}
-            className={styles.textInput} // Use CSS module
-            placeholder="Enter text here" // Optional placeholder
+            className={styles.textInput}
         />
     </div>
 }

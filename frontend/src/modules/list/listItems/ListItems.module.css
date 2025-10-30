@@ -1,0 +1,16 @@
+.title {
+    font-size: 1.4rem;
+}
+
+.itemContainer{
+    background-color: var(--background);
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.buttonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,18 +1,20 @@
 import React from 'react';
 import {ListItem} from "@/src/modules/list/listItem/ListItem";
 import {ShoppingListItem} from "@/src/types/ShoppingListItem";
+import styles from "./ShoppintItemList.module.css"
+import {Button} from "@/src/modules/input/button/Button";
 
-interface ItemListProps {
+interface ShoppingItemListProps {
     items: ShoppingListItem[];
     checkButtonClicked: (id: number) => void;
 }
 
-export function ItemList({ items, checkButtonClicked }: ItemListProps) {
+export function ShoppingItemList({ items, checkButtonClicked }: ShoppingItemListProps) {
     return (
-        <div>
-            {items.map((item) => (
+        <div className={styles.list}>
+            {items.map((item, index) => (
                 <ListItem
-                    key={item.id}
+                    key={index}
                     listItem={item}
                     checkButtonClicked={() => checkButtonClicked(item.id)}
                 />
