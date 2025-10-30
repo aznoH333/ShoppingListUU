@@ -14,12 +14,33 @@ import {NumberInput} from "@/src/modules/input/numberInput/NumberInput";
 
 interface ListItemsProps {
     list: ShoppingList,
+    updateList: (list: ShoppingList) => void,
 }
 
-export function ListItems({list}: ListItemsProps) {
+export function ListItems({list, updateList}: ListItemsProps) {
     const [newItemModalOpen, setNewItemModalOpen] = useState(false);
     const [newItemName, setNewItemName] = useState("");
     const [newItemQuantity, setNewItemQuantity] = useState(1);
+
+
+    const addNewItem = () => {
+        // TODO : this is placeholder logic. this will eventually be implemented on the backend
+        // why is business logic being implemented on the frontend a requirement?
+        // who knows? if it where up to me i would just put a console.debug("TODO implement api call")
+        // or something like that here.
+        // teaching ppl to implement business logic client side just leads to bad habits and security vulnerabilities
+        updateList({
+            ...list,
+            items: [...list.items, {
+                id: 0,
+                name: newItemName,
+                quantity: newItemQuantity,
+                state: "visible",
+            }]
+        });
+
+        setNewItemModalOpen(false);
+    }
 
     return <Card>
         <div className={styles.title}>
@@ -34,7 +55,7 @@ export function ListItems({list}: ListItemsProps) {
             <Button onClick={()=>{setNewItemModalOpen(true)}}>Add new item</Button>
         </div>
 
-        <Modal isOpen={newItemModalOpen} setIsOpen={setNewItemModalOpen} onConfirm={()=>{alert("todo")}}>
+        <Modal isOpen={newItemModalOpen} setIsOpen={setNewItemModalOpen} onConfirm={addNewItem}>
             <TextInput value={newItemName} setValue={setNewItemName} label={"Item name"}/>
             <NumberInput value={newItemQuantity} setValue={setNewItemQuantity} label={"Quantity"}/>
         </Modal>
