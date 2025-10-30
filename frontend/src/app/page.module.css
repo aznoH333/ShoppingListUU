@@ -1,0 +1,11 @@
+.mainBodyContainer {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+}
+
+.mainBody {
+    width: calc(min(100%, 600px));
+}
