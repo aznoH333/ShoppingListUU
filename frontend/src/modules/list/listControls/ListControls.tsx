@@ -19,7 +19,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
 
     const listUser = shoppingListGetUserAsListUser(loggedInUser, list);
     const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
-
+    const [nameEdit, setNameEdit] = useState(list.name);
 
     if (!listUser) {
         return <div>
@@ -27,6 +27,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
         </div>
     }
 
+    const isUserOwner = listUser.role === "owner";
 
     return <Card>
         <div className={styles.header}>
@@ -40,7 +41,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
                 <Button onClick={()=>setEditModalOpen(true)} disabled={listUser.role !== "owner"}>
                     Edit
                 </Button>
-                <Button onClick={()=>alert("delete")} disabled={listUser.role === "owner"}>
+                <Button onClick={()=>alert("todo : leave")} disabled={listUser.role === "owner"}>
                     Leave
                 </Button>
             </div>
@@ -48,16 +49,36 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
 
         <Modal
             isOpen={editModalOpen}
-            onConfirm={()=>alert("a")}
+            onConfirm={()=>{
+                updateList({
+                    ...list,
+                    name: nameEdit,
+                })
+            }}
             setIsOpen={setEditModalOpen}
         >
-            test
-            <NumberInput value={1} setValue={()=>{}} label={"count"}/>
-            <TextInput value={"a"} setValue={()=>{}} label={"list name"}/>
+            <TextInput value={nameEdit} setValue={setNameEdit} label={"list name"}/>
 
-            <UserList users={list.users} buttons={<div>aaaa</div>}>
-            </UserList>
         </Modal>
+
+
+
+        <div className={styles.userHeader}>
+            Members
+        </div>
+        <div className={styles.userList}>
+            <UserList users={list.users}/>
+
+        </div>
+
+        {isUserOwner && (
+            <div className={styles.userButtonContainer}>
+                <Button onClick={()=>{alert("TODO this")}}>Add user</Button>
+            </div>
+        )
+        }
+
+
     </Card>
 
 

@@ -1,0 +1,36 @@
+.card {
+    background-color: var(--background);
+    border: 1px solid var(--color-muted);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+.visible {
+    opacity: 1;
+}
+
+.checked {
+    background-color: var(--color-muted);
+    opacity: 0.6; /* Muted appearance when checked */
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-size: 16px;
+    color: var(--color-text);
+}
+
+.quantity {
+    font-size: 14px;
+    color: var(--color-muted);
+}
+

@@ -7,6 +7,7 @@ import {ShoppingList} from "@/src/types/ShoppingList";
 import {useSearchParams} from "next/navigation";
 import {useLoggedInUser} from "@/src/hooks/users/useLoggedInUser";
 import {ListControls} from "@/src/modules/list/listControls/ListControls";
+import {ListItems} from "@/src/modules/list/listItems/ListItems";
 
 
 interface ListOverviewPage {
@@ -31,7 +32,8 @@ export default function ListOverviewPage({params}: ListOverviewPage) {
     }
 
 
-    return <div>
+    return <>
         <ListControls loggedInUser={user} list={list} updateList={updateList}/>
-    </div>;
+        <ListItems list={list}/>
+    </>;
 }

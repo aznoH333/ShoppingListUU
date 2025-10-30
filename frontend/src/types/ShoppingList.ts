@@ -17,6 +17,11 @@ export const DEBUG_SHOPPING_LIST: ShoppingList = {
             id: 0,
             user: DEBUG_USERS[0],
             role: "owner",
+        },
+        {
+            id: 0,
+            user: DEBUG_USERS[1],
+            role: "member",
         }
     ],
 

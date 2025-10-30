@@ -2,6 +2,7 @@ import {ShoppingListUser} from "@/src/types/ShoppingListUser";
 import {User} from "@/src/types/User";
 import React from "react";
 import {UserCard} from "@/src/modules/user/userCard/UserCard";
+import styles from "./UserList.module.css"
 
 interface UserListProps {
     users: User[] | ShoppingListUser[];
@@ -10,7 +11,7 @@ interface UserListProps {
 
 export function UserList({ users, buttons }: UserListProps) {
     return (
-        <div>
+        <div className={styles.list}>
             {users.map((it) => {
                 const isShoppingListUser = 'role' in it; // Check if userItem is ShoppingListUser
                 return (
