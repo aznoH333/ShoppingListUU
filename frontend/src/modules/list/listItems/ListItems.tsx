@@ -29,10 +29,17 @@ export function ListItems({list, updateList}: ListItemsProps) {
         // who knows? if it where up to me i would just put a console.debug("TODO implement api call")
         // or something like that here.
         // teaching ppl to implement business logic client side just leads to bad habits and security vulnerabilities
+
+        const newId = list.items.length > 0 ?
+            list.items
+                .map((it)=>it.id)
+                .reduce((a, acc)=>Math.max(a, acc)) + 1
+            : 0;
+
         updateList({
             ...list,
             items: [...list.items, {
-                id: 0,
+                id: newId,
                 name: newItemName,
                 quantity: newItemQuantity,
                 state: "visible",
@@ -42,13 +49,25 @@ export function ListItems({list, updateList}: ListItemsProps) {
         setNewItemModalOpen(false);
     }
 
+    const toggleItemState = (id: number) => {
+        const item = list.items.find((it)=>it.id === id);
+
+        if (item === undefined) {
+            return;
+        }
+
+        item.state = item.state === "visible" ? "checked" : "visible";
+        updateList({...list});
+    }
+
+
     return <Card>
         <div className={styles.title}>
             Items
         </div>
 
         <div className={styles.itemContainer}>
-            <ShoppingItemList items={list.items} checkButtonClicked={()=>{}}/>
+            <ShoppingItemList items={list.items} checkButtonClicked={toggleItemState}/>
         </div>
 
         <div className={styles.buttonContainer}>

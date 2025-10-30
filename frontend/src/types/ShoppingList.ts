@@ -33,7 +33,7 @@ export const DEBUG_SHOPPING_LIST: ShoppingList = {
             state: "visible",
         },
         {
-            id: 0,
+            id: 1,
             name: "sunflower oil",
             quantity: 1,
             state: "checked",
