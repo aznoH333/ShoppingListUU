@@ -38,6 +38,10 @@ export function ListItems({loggedInUser, list, updateList}: ListItemsProps) {
         // or something like that here.
         // teaching ppl to implement business logic client side just leads to bad habits and security vulnerabilities
 
+        if (newItemName === "") {
+            return;
+        }
+
         const newId = list.items.length > 0 ?
             list.items
                 .map((it)=>it.id)
@@ -49,7 +53,7 @@ export function ListItems({loggedInUser, list, updateList}: ListItemsProps) {
             items: [...list.items, {
                 id: newId,
                 name: newItemName,
-                quantity: newItemQuantity,
+                quantity: Math.min(Math.max(newItemQuantity, 1), 9999),
                 state: "visible",
             }]
         });
@@ -87,7 +91,7 @@ export function ListItems({loggedInUser, list, updateList}: ListItemsProps) {
 
         <Modal isOpen={newItemModalOpen} setIsOpen={setNewItemModalOpen} onConfirm={addNewItem}>
             <TextInput value={newItemName} setValue={setNewItemName} label={"Item name"}/>
-            <NumberInput value={newItemQuantity} setValue={setNewItemQuantity} label={"Quantity"}/>
+            <NumberInput value={newItemQuantity} setValue={setNewItemQuantity} label={"Quantity"} minValue={0} maxValue={9999}/>
         </Modal>
     </Card>
 }

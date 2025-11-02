@@ -5,11 +5,23 @@ interface NumberInputProps {
     value: number;
     setValue: (value: number) => void;
     label: string;
+    minValue?: number;
+    maxValue?: number;
 }
 
-export function NumberInput({ value, setValue, label }: NumberInputProps) {
+export function NumberInput({ value, setValue, label, minValue, maxValue }: NumberInputProps) {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = Number(event.target.value); // Parse the input value to a number
+        let newValue = Number(event.target.value); // Parse the input value to a number
+
+        if (event.target.value !== "" && maxValue && newValue > maxValue) {
+            newValue = maxValue;
+        }
+
+        if (event.target.value !== "" && minValue && newValue < minValue) {
+            newValue = minValue;
+        }
+
+        event.target.value = newValue.toString();
         setValue(newValue);
     };
 

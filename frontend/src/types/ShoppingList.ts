@@ -60,13 +60,13 @@ export const MEMBER_SHOPPING_LIST: ShoppingList = {
     items: [
         {
             id: 0,
-            name: "beans",
+            name: "AAAAAAAAAAAAAAAAAAA!!!!!!",
             quantity: 2,
             state: "visible",
         },
         {
             id: 1,
-            name: "sunflower oil",
+            name: "item",
             quantity: 10,
             state: "visible",
         }

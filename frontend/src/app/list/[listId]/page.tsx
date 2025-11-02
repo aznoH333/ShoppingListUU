@@ -12,7 +12,6 @@ export default function ListOverviewPage() {
 
     const { listId } = useParams();
 
-    // Convert listId to a number. Make sure to check it's defined first.
     const listIdNumber = typeof listId === 'string' ? parseInt(listId, 10) : NaN;
 
 
