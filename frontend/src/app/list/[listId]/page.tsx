@@ -15,11 +15,8 @@ export default function ListOverviewPage() {
     const listIdNumber = typeof listId === 'string' ? parseInt(listId, 10) : NaN;
 
 
-    console.debug(listId);
     const { data: list, update: updateList } = useList(listIdNumber);
     const { data: user } = useLoggedInUser();
-
-
 
 
     if (!list || !user) {

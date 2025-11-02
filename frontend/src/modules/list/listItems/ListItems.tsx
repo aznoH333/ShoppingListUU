@@ -12,6 +12,8 @@ import {TextInput} from "@/src/modules/input/textInput/TextInput";
 import {NumberInput} from "@/src/modules/input/numberInput/NumberInput";
 import {getUserRightsForAList} from "@/src/types/ShoppingListUser";
 import {User} from "@/src/types/User";
+import {List} from "postcss/lib/list";
+import {Dropdown} from "@/src/modules/input/dropdown/Dropdown";
 
 
 interface ListItemsProps {
@@ -19,6 +21,8 @@ interface ListItemsProps {
     list: ShoppingList,
     updateList: (list: ShoppingList) => void,
 }
+
+type ListFilter = "all" | "visible" | "checked";
 
 export function ListItems({loggedInUser, list, updateList}: ListItemsProps) {
 
@@ -29,15 +33,11 @@ export function ListItems({loggedInUser, list, updateList}: ListItemsProps) {
     const [newItemModalOpen, setNewItemModalOpen] = useState(false);
     const [newItemName, setNewItemName] = useState("");
     const [newItemQuantity, setNewItemQuantity] = useState(1);
-
+    const [listFilter, setListFilter] = useState<ListFilter>("all");
+    const filters: ListFilter[] = ["all", "visible", "checked"];
 
     const addNewItem = () => {
         // TODO : this is placeholder logic. this will eventually be implemented on the backend
-        // why is business logic being implemented on the frontend a requirement?
-        // who knows? if it where up to me i would just put a console.debug("TODO implement api call")
-        // or something like that here.
-        // teaching ppl to implement business logic client side just leads to bad habits and security vulnerabilities
-
         if (newItemName === "") {
             return;
         }
@@ -72,14 +72,33 @@ export function ListItems({loggedInUser, list, updateList}: ListItemsProps) {
         updateList({...list});
     }
 
+    const filteredItems = list.items.filter((it)=>{
+       switch (listFilter) {
+           case "all":
+               return true;
+           case "checked":
+               return it.state === "checked";
+           case "visible":
+               return it.state === "visible";
+       }
+    });
+
 
     return <Card>
-        <div className={styles.title}>
-            Items
+
+        <div className={styles.header}>
+            <div className={styles.title}>
+                Items
+            </div>
+            <div className={styles.filter}>
+                Filter:
+                <Dropdown values={filters} defaultValue={listFilter} setValue={setListFilter as (value: string)=>void}/>
+            </div>
         </div>
 
+
         <div className={styles.itemContainer}>
-            <ShoppingItemList items={list.items} checkButtonClicked={toggleItemState}/>
+            <ShoppingItemList items={filteredItems} checkButtonClicked={toggleItemState}/>
         </div>
 
         {userRights.canAddItems && (

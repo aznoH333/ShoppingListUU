@@ -21,7 +21,6 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
     const listUser = shoppingListGetUserAsListUser(loggedInUser, list);
     const users = useApplicationUsers().get();
 
-    console.debug(listUser?.role, listUser, loggedInUser.id, loggedInUser.name);
 
 
     const userRights = getUserRightsForAList(listUser);
