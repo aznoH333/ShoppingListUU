@@ -4,9 +4,16 @@ import React from "react";
 import {UserCard} from "@/src/modules/user/userCard/UserCard";
 import styles from "./UserList.module.css"
 
+
+export interface UserListButton {
+    label: string,
+    function: (id: number)=>void,
+}
+
+
 interface UserListProps {
     users: User[] | ShoppingListUser[];
-    buttons?: React.ReactNode;
+    buttons?: UserListButton;
 }
 
 export function UserList({ users, buttons }: UserListProps) {
@@ -19,7 +26,7 @@ export function UserList({ users, buttons }: UserListProps) {
                         key={isShoppingListUser ? it.user.id : it.id}
                         user={isShoppingListUser ? it.user : it}
                         userRole={isShoppingListUser ? it.role : undefined}
-                        buttons={buttons}
+                        button={buttons}
                     />
                 );
             })}

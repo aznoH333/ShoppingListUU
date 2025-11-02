@@ -6,7 +6,7 @@ import React from "react";
 interface ModalProps {
     isOpen: boolean;
     children: React.ReactNode;
-    onConfirm: () => void;
+    onConfirm?: () => void;
     setIsOpen: (value: boolean)=>void
 }
 
@@ -20,7 +20,7 @@ export function Modal({isOpen, children, onConfirm, setIsOpen}: ModalProps) {
                     {children}
                 </div>
                 <div className={styles.modalFooter}>
-                    <Button onClick={onConfirm}>Confirm</Button>
+                    {onConfirm && (<Button onClick={onConfirm}>Confirm</Button>)}
                     <Button onClick={()=>setIsOpen(false)}>Close</Button>
                 </div>
             </div>
