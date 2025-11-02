@@ -11,7 +11,7 @@ export interface ShoppingListItem {
 
 interface ShoppingListItemProps {
     listItem: ShoppingListItem;
-    checkButtonClicked: (id: number) => void;
+    checkButtonClicked?: (id: number) => void;
 }
 
 export function ListItem({ listItem, checkButtonClicked }: ShoppingListItemProps) {
@@ -21,9 +21,11 @@ export function ListItem({ listItem, checkButtonClicked }: ShoppingListItemProps
                 <div className={styles.name}>{listItem.name}</div>
                 <div className={styles.quantity}>{listItem.quantity}x</div>
             </div>
-            <Button onClick={()=>{checkButtonClicked(listItem.id)}}>
-                {listItem.state === "checked" ? "Revert" : "Done"}
-            </Button>
+            {checkButtonClicked && (
+                <Button onClick={()=>{checkButtonClicked(listItem.id)}}>
+                    {listItem.state === "checked" ? "Revert" : "Done"}
+                </Button>
+            )}
         </div>
     );
 }

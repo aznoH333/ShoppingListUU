@@ -12,13 +12,15 @@ export interface ShoppingListUser {
 
 
 /**
- * Describes what action can a role do in a shopping list
+ * Describes what actions can a user do in a shopping list
  */
 interface UserRight {
     canAddUsers: boolean,
     canEditList: boolean,
     canRemoveUsers: boolean,
     canLeave: boolean,
+    canAddItems: boolean,
+    canCompleteItems: boolean,
 }
 
 
@@ -28,18 +30,24 @@ const USER_RIGHTS: Record<UserRole, UserRight> = {
         canEditList: true,
         canRemoveUsers: true,
         canLeave: false,
+        canAddItems: true,
+        canCompleteItems: true,
     },
     "member": {
         canAddUsers: false,
         canEditList: false,
         canRemoveUsers: false,
         canLeave: true,
+        canAddItems: true,
+        canCompleteItems: true,
     },
     "visitor": {
         canAddUsers: false,
         canEditList: false,
         canRemoveUsers: false,
         canLeave: false,
+        canAddItems: false,
+        canCompleteItems: false
     }
 }
 

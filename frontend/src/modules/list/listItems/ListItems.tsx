@@ -2,7 +2,7 @@
 
 
 import styles from "./ListItems.module.css";
-import {ShoppingList} from "@/src/types/ShoppingList";
+import {ShoppingList, shoppingListGetUserAsListUser} from "@/src/types/ShoppingList";
 import {Card} from "@/src/modules/card/Card";
 import {ShoppingItemList} from "@/src/modules/list/shoppinItemList/ShoppingItemList";
 import {Button} from "@/src/modules/input/button/Button";
@@ -10,14 +10,22 @@ import React, {useState} from "react";
 import {Modal} from "@/src/modules/modal/Modal";
 import {TextInput} from "@/src/modules/input/textInput/TextInput";
 import {NumberInput} from "@/src/modules/input/numberInput/NumberInput";
+import {getUserRightsForAList} from "@/src/types/ShoppingListUser";
+import {User} from "@/src/types/User";
 
 
 interface ListItemsProps {
+    loggedInUser: User,
     list: ShoppingList,
     updateList: (list: ShoppingList) => void,
 }
 
-export function ListItems({list, updateList}: ListItemsProps) {
+export function ListItems({loggedInUser, list, updateList}: ListItemsProps) {
+
+    const listUser = shoppingListGetUserAsListUser(loggedInUser, list);
+    const userRights = getUserRightsForAList(listUser);
+
+
     const [newItemModalOpen, setNewItemModalOpen] = useState(false);
     const [newItemName, setNewItemName] = useState("");
     const [newItemQuantity, setNewItemQuantity] = useState(1);
@@ -70,9 +78,12 @@ export function ListItems({list, updateList}: ListItemsProps) {
             <ShoppingItemList items={list.items} checkButtonClicked={toggleItemState}/>
         </div>
 
-        <div className={styles.buttonContainer}>
-            <Button onClick={()=>{setNewItemModalOpen(true)}}>Add new item</Button>
-        </div>
+        {userRights.canAddItems && (
+            <div className={styles.buttonContainer}>
+                <Button onClick={()=>{setNewItemModalOpen(true)}}>Add new item</Button>
+            </div>
+        )}
+
 
         <Modal isOpen={newItemModalOpen} setIsOpen={setNewItemModalOpen} onConfirm={addNewItem}>
             <TextInput value={newItemName} setValue={setNewItemName} label={"Item name"}/>

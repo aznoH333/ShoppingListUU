@@ -3,10 +3,11 @@ import React from "react";
 import styles from "./UserCard.module.css"
 import {UserListButton} from "@/src/modules/user/userList/UserList";
 import {Button} from "@/src/modules/input/button/Button";
+import {UserRole} from "@/src/types/ShoppingListUser";
 
 interface UserCardProps {
     user: User;
-    userRole?: undefined | 'owner' | 'member';
+    userRole?: UserRole | undefined;
     button?: UserListButton;
 }
 

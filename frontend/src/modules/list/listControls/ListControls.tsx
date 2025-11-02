@@ -94,10 +94,10 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
             </div>
 
             <div className={styles.headerButtons}>
-                <Button onClick={()=>setEditModalOpen(true)} disabled={userRights.canEditList}>
+                <Button onClick={()=>setEditModalOpen(true)} disabled={!userRights.canEditList}>
                     Edit
                 </Button>
-                <Button onClick={()=>alert("todo : leave")} disabled={userRights.canLeave}>
+                <Button onClick={()=>alert("todo : leave")} disabled={!userRights.canLeave}>
                     Leave
                 </Button>
             </div>

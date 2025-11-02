@@ -34,6 +34,6 @@ export default function ListOverviewPage({params}: ListOverviewPage) {
 
     return <>
         <ListControls loggedInUser={user} list={list} updateList={updateList}/>
-        <ListItems list={list} updateList={updateList}/>
+        <ListItems list={list} updateList={updateList} loggedInUser={user}/>
     </>;
 }

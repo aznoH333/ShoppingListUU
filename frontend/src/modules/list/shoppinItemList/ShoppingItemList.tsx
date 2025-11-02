@@ -6,7 +6,7 @@ import {Button} from "@/src/modules/input/button/Button";
 
 interface ShoppingItemListProps {
     items: ShoppingListItem[];
-    checkButtonClicked: (id: number) => void;
+    checkButtonClicked?: (id: number) => void;
 }
 
 export function ShoppingItemList({ items, checkButtonClicked }: ShoppingItemListProps) {
@@ -16,7 +16,7 @@ export function ShoppingItemList({ items, checkButtonClicked }: ShoppingItemList
                 <ListItem
                     key={index}
                     listItem={item}
-                    checkButtonClicked={() => checkButtonClicked(item.id)}
+                    checkButtonClicked={checkButtonClicked ? () => checkButtonClicked(item.id) : undefined}
                 />
             ))}
         </div>
