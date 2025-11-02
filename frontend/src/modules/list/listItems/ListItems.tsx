@@ -98,7 +98,7 @@ export function ListItems({loggedInUser, list, updateList}: ListItemsProps) {
 
 
         <div className={styles.itemContainer}>
-            <ShoppingItemList items={filteredItems} checkButtonClicked={toggleItemState}/>
+            <ShoppingItemList items={filteredItems} checkButtonClicked={userRights.canCompleteItems ? toggleItemState : undefined}/>
         </div>
 
         {userRights.canAddItems && (
