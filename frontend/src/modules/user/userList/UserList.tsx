@@ -8,6 +8,7 @@ import styles from "./UserList.module.css"
 export interface UserListButton {
     label: string,
     function: (id: number)=>void,
+    dontShowForUsers?: number[], // an array of ids of users for which the buttons shouldn't display
 }
 
 

@@ -7,7 +7,7 @@ import {use, useState} from "react";
 import {Modal} from "@/src/modules/modal/Modal";
 import {TextInput} from "@/src/modules/input/textInput/TextInput";
 import {NumberInput} from "@/src/modules/input/numberInput/NumberInput";
-import {UserList} from "@/src/modules/user/userList/UserList";
+import {UserList, UserListButton} from "@/src/modules/user/userList/UserList";
 import {useApplicationUsers} from "@/src/hooks/users/useApplicationUsers";
 
 interface ListControlsProps {
@@ -23,6 +23,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
 
     const listUserIds = list.users.map((it)=>it.user.id);
     const possibleUsersToAdd = users.filter((it)=>!listUserIds.includes(it.id));
+
     const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
     const [nameEdit, setNameEdit] = useState(list.name);
 
@@ -33,6 +34,9 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
             TODO : no access
         </div>
     }
+
+
+
 
     const isUserOwner = listUser.role === "owner";
 
@@ -67,6 +71,22 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
 
         setUserModalOpen(false);
     }
+
+    const removeUserFromList = (userId: number) => {
+
+        updateList({
+            ...list,
+            users: list.users.filter((it)=>it.user.id !== userId)
+        });
+    }
+
+    // admin buttons
+    const adminButtons: UserListButton | undefined =
+        listUser.role === "owner" ? {
+            label: "kick",
+            function: removeUserFromList,
+            dontShowForUsers: [listUser.id]
+        } : undefined
 
     return <Card>
         <div className={styles.header}>
@@ -106,7 +126,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
             Members
         </div>
         <div className={styles.userList}>
-            <UserList users={list.users}/>
+            <UserList users={list.users} buttons={adminButtons}/>
 
         </div>
 

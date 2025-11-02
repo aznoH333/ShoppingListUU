@@ -17,7 +17,7 @@ export function UserCard({ user, userRole, button }: UserCardProps) {
                 <div className={styles.name}>{user.name}</div>
                 {userRole && <div className={styles.role}>{userRole}</div>}
             </div>
-            {button && (<div className={styles.buttons}>
+            {button && !button.dontShowForUsers?.includes(user.id) && (<div className={styles.buttons}>
                 <Button onClick={()=>{button?.function(user.id)}}>
                     {button.label}
                 </Button>
