@@ -20,6 +20,10 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
 
     const listUser = shoppingListGetUserAsListUser(loggedInUser, list);
     const users = useApplicationUsers().get();
+
+    console.debug(listUser?.role, listUser, loggedInUser.id, loggedInUser.name);
+
+
     const userRights = getUserRightsForAList(listUser);
     const listUserIds = list.users.map((it)=>it.user.id);
     const possibleUsersToAdd = users.filter((it)=>!listUserIds.includes(it.id));
@@ -29,11 +33,6 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
 
     const [userModalOpen, setUserModalOpen] = useState(false);
 
-    if (!listUser) {
-        return <div>
-            TODO : no access
-        </div>
-    }
 
 
 
@@ -82,7 +81,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
         userRights.canRemoveUsers ? {
             label: "kick",
             function: removeUserFromList,
-            dontShowForUsers: [listUser.id]
+            dontShowForUsers: [listUser?.id ?? 0]
         } : undefined
 
     return <Card>
@@ -97,7 +96,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
                 <Button onClick={()=>setEditModalOpen(true)} disabled={!userRights.canEditList}>
                     Edit
                 </Button>
-                <Button onClick={()=>alert("todo : leave")} disabled={!userRights.canLeave}>
+                <Button onClick={()=>{removeUserFromList(loggedInUser.id)}} disabled={!userRights.canLeave}>
                     Leave
                 </Button>
             </div>

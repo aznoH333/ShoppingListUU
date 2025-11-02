@@ -38,7 +38,7 @@ const USER_RIGHTS: Record<UserRole, UserRight> = {
         canEditList: false,
         canRemoveUsers: false,
         canLeave: true,
-        canAddItems: true,
+        canAddItems: false,
         canCompleteItems: true,
     },
     "visitor": {

@@ -19,7 +19,7 @@ export const DEBUG_SHOPPING_LIST: ShoppingList = {
             role: "owner",
         },
         {
-            id: 0,
+            id: 1,
             user: DEBUG_USERS[1],
             role: "member",
         }
@@ -37,6 +37,38 @@ export const DEBUG_SHOPPING_LIST: ShoppingList = {
             name: "sunflower oil",
             quantity: 1,
             state: "checked",
+        }
+    ],
+}
+
+export const MEMBER_SHOPPING_LIST: ShoppingList = {
+    id: 1,
+    name: "debug list 2",
+    users: [
+        {
+            id: 0,
+            user: DEBUG_USERS[0],
+            role: "member",
+        },
+        {
+            id: 1,
+            user: DEBUG_USERS[1],
+            role: "owner",
+        }
+    ],
+
+    items: [
+        {
+            id: 0,
+            name: "beans",
+            quantity: 2,
+            state: "visible",
+        },
+        {
+            id: 1,
+            name: "sunflower oil",
+            quantity: 10,
+            state: "visible",
         }
     ],
 }

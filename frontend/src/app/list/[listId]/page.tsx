@@ -1,25 +1,23 @@
 "use client"
-
 import {Card} from "@/src/modules/card/Card";
 import {useList} from "@/src/hooks/lists/useList";
-import {useState} from "react";
-import {ShoppingList} from "@/src/types/ShoppingList";
-import {useSearchParams} from "next/navigation";
 import {useLoggedInUser} from "@/src/hooks/users/useLoggedInUser";
 import {ListControls} from "@/src/modules/list/listControls/ListControls";
 import {ListItems} from "@/src/modules/list/listItems/ListItems";
+import {useParams} from "next/navigation";
 
 
-interface ListOverviewPage {
-    params: string
-}
 
-export default function ListOverviewPage({params}: ListOverviewPage) {
+export default function ListOverviewPage() {
 
-    // Retrieve a specific parameter by name
-    const listId = parseInt(params as string);
+    const { listId } = useParams();
 
-    const { data: list, update: updateList } = useList(listId);
+    // Convert listId to a number. Make sure to check it's defined first.
+    const listIdNumber = typeof listId === 'string' ? parseInt(listId, 10) : NaN;
+
+
+    console.debug(listId);
+    const { data: list, update: updateList } = useList(listIdNumber);
     const { data: user } = useLoggedInUser();
 
 
