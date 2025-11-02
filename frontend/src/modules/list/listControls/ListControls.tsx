@@ -3,12 +3,12 @@ import {ShoppingList, shoppingListGetUserAsListUser} from "@/src/types/ShoppingL
 import styles from "./ListControls.module.css";
 import {Card} from "@/src/modules/card/Card";
 import {Button} from "@/src/modules/input/button/Button";
-import {use, useState} from "react";
+import {useState} from "react";
 import {Modal} from "@/src/modules/modal/Modal";
 import {TextInput} from "@/src/modules/input/textInput/TextInput";
-import {NumberInput} from "@/src/modules/input/numberInput/NumberInput";
 import {UserList, UserListButton} from "@/src/modules/user/userList/UserList";
 import {useApplicationUsers} from "@/src/hooks/users/useApplicationUsers";
+import {getUserRightsForAList} from "@/src/types/ShoppingListUser";
 
 interface ListControlsProps {
     loggedInUser: User,
@@ -20,7 +20,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
 
     const listUser = shoppingListGetUserAsListUser(loggedInUser, list);
     const users = useApplicationUsers().get();
-
+    const userRights = getUserRightsForAList(listUser);
     const listUserIds = list.users.map((it)=>it.user.id);
     const possibleUsersToAdd = users.filter((it)=>!listUserIds.includes(it.id));
 
@@ -36,9 +36,6 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
     }
 
 
-
-
-    const isUserOwner = listUser.role === "owner";
 
     const editList = ()=> {
         updateList({
@@ -82,7 +79,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
 
     // admin buttons
     const adminButtons: UserListButton | undefined =
-        listUser.role === "owner" ? {
+        userRights.canRemoveUsers ? {
             label: "kick",
             function: removeUserFromList,
             dontShowForUsers: [listUser.id]
@@ -97,10 +94,10 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
             </div>
 
             <div className={styles.headerButtons}>
-                <Button onClick={()=>setEditModalOpen(true)} disabled={listUser.role !== "owner"}>
+                <Button onClick={()=>setEditModalOpen(true)} disabled={userRights.canEditList}>
                     Edit
                 </Button>
-                <Button onClick={()=>alert("todo : leave")} disabled={listUser.role === "owner"}>
+                <Button onClick={()=>alert("todo : leave")} disabled={userRights.canLeave}>
                     Leave
                 </Button>
             </div>
@@ -130,7 +127,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
 
         </div>
 
-        {isUserOwner && (
+        {userRights.canAddUsers && (
             <div className={styles.userButtonContainer}>
                 <Button onClick={()=>{setUserModalOpen(true)}}>Add user</Button>
             </div>
