@@ -1,5 +1,6 @@
 
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -11,8 +12,8 @@ export default function Home() {
     >
 
         <div>TODO : home page</div>
-        <a href={"/list/0"} className={styles.link}>open debug list as owner</a>
-        <a href={"/list/1"} className={styles.link}>open debug list 2 as member</a>
+        <Link href={"/list/0"} className={styles.link}>open debug list as owner</Link>
+        <Link href={"/list/1"} className={styles.link}>open debug list 2 as member</Link>
 
 
         <p>
