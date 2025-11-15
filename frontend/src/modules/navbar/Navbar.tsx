@@ -1,5 +1,6 @@
 
 import styles from "./Navbar.module.css"
+import Link from "next/link";
 
 interface NavbarProps {
     // TODO
@@ -9,7 +10,7 @@ interface NavbarProps {
 export function Navbar({}: NavbarProps) {
     return <div className={styles.container}>
         <div className={styles.body}>
-            <a className={styles.navLink} href={"/"}>Home</a>
+            <Link className={styles.navLink} href={"/"}>Home</Link>
             <a className={styles.navLink}>Login</a>
         </div>
     </div>

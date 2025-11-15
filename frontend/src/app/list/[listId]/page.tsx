@@ -1,33 +1,24 @@
-"use client"
-import {Card} from "@/src/modules/card/Card";
-import {useList} from "@/src/hooks/lists/useList";
-import {useLoggedInUser} from "@/src/hooks/users/useLoggedInUser";
-import {ListControls} from "@/src/modules/list/listControls/ListControls";
-import {ListItems} from "@/src/modules/list/listItems/ListItems";
-import {useParams} from "next/navigation";
+import {ListOverviewFragment} from "@/src/app/list/[listId]/ListOverviewFragment";
 
+export async function generateStaticParams() {
+    const listIds = ['0', '1']; // Example IDs
+    return listIds.map(id => ({ listId: id }));
+}
 
+interface ListPageProps {
+    params: {
+        listId: string;
+    };
+}
 
-export default function ListOverviewPage() {
-
-    const { listId } = useParams();
-
-    const listIdNumber = typeof listId === 'string' ? parseInt(listId, 10) : NaN;
-
-
-    const { data: list, update: updateList } = useList(listIdNumber);
-    const { data: user } = useLoggedInUser();
-
-
-    if (!list || !user) {
-        return <Card>
-            loading...
-        </Card>
+export default async function ListOverviewPage({params}: ListPageProps) {
+    const { listId } = await params;
+    // Parse the string to a number
+    const listIdNumber = parseInt(listId as string, 10);
+    // Handle invalid number case
+    if (isNaN(listIdNumber)) {
+        return <div>Error: Invalid List ID diaosdoasduioyasyioduasoid {listId} : {listIdNumber}</div>;
     }
 
-
-    return <>
-        <ListControls loggedInUser={user} list={list} updateList={updateList}/>
-        <ListItems list={list} updateList={updateList} loggedInUser={user}/>
-    </>;
+    return <ListOverviewFragment listId={listIdNumber} />;
 }
