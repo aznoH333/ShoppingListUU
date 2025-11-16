@@ -5,6 +5,7 @@ import {useLoggedInUser} from "@/src/hooks/users/useLoggedInUser";
 import {DEBUG_SHOPPING_LIST, EMPTY_SHOPPING_LIST, MEMBER_SHOPPING_LIST, ShoppingList} from "@/src/types/ShoppingList";
 import {ListCard} from "@/src/modules/listOverview/listCard/ListCard";
 import {ListCardDisplay} from "@/src/modules/listOverview/listCardDisplay/ListCardDisplay";
+import {ListOverviewControls} from "@/src/modules/listOverview/listOverviewControlls/ListOverviewControls";
 
 
 export default function ListOverview() {
@@ -18,8 +19,13 @@ export default function ListOverview() {
         </div>
     }
 
-    return <Card>
-        hello
-        <ListCardDisplay lists={ownedLists} loggedInUser={loggedInUser.data}/>
-    </Card>
+    return <>
+        <Card>
+            <ListOverviewControls loggedInUser={loggedInUser.data}/>
+        </Card>
+        <Card>
+            <ListCardDisplay lists={ownedLists} loggedInUser={loggedInUser.data}/>
+        </Card>
+    </>
+
 }
