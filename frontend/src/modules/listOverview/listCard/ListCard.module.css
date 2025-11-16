@@ -1,0 +1,32 @@
+.card{
+    border-radius: 6px;
+    background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.cardRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 1.3rem;
+    color: var(--color-primary);
+}
+
+.completed {
+    color: var(--color-muted);
+    font-size: 0.8rem;
+}
+
+.buttons{
+    margin-top: 9px;
+    display: flex;
+    gap: 4px;
+    flex-direction: row;
+}

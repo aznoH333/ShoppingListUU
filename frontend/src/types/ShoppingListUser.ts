@@ -21,6 +21,8 @@ interface UserRight {
     canLeave: boolean,
     canAddItems: boolean,
     canCompleteItems: boolean,
+    canArchiveList: boolean,
+    canDeleteList: boolean,
 }
 
 
@@ -32,6 +34,8 @@ const USER_RIGHTS: Record<UserRole, UserRight> = {
         canLeave: false,
         canAddItems: true,
         canCompleteItems: true,
+        canArchiveList: true,
+        canDeleteList: true,
     },
     "member": {
         canAddUsers: false,
@@ -40,6 +44,8 @@ const USER_RIGHTS: Record<UserRole, UserRight> = {
         canLeave: true,
         canAddItems: false,
         canCompleteItems: true,
+        canArchiveList: false,
+        canDeleteList: false,
     },
     "visitor": {
         canAddUsers: false,
@@ -47,7 +53,9 @@ const USER_RIGHTS: Record<UserRole, UserRight> = {
         canRemoveUsers: false,
         canLeave: false,
         canAddItems: false,
-        canCompleteItems: false
+        canCompleteItems: false,
+        canArchiveList: false,
+        canDeleteList: false,
     }
 }
 

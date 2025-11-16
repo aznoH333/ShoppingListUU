@@ -73,6 +73,22 @@ export const MEMBER_SHOPPING_LIST: ShoppingList = {
     ],
 }
 
+export const EMPTY_SHOPPING_LIST: ShoppingList = {
+    id: 2,
+    name: "new list",
+    users: [
+        {
+            id: 0,
+            user: DEBUG_USERS[0],
+            role: "owner",
+        },
+    ],
+
+    items: [
+
+    ],
+}
+
 export function shoppingListGetUserAsListUser(user: User, shoppingList: ShoppingList): ShoppingListUser | undefined {
     return shoppingList.users.find((it)=> it.id === user.id );
 }
