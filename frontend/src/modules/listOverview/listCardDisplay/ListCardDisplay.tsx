@@ -6,9 +6,11 @@ import {ListCard} from "@/src/modules/listOverview/listCard/ListCard";
 interface ListCardDisplayProps {
     lists: ShoppingList[],
     loggedInUser: User,
+    onListDelete: (listId: number)=>void;
+    onListArchive: (listId: number)=>void;
 }
-export function ListCardDisplay({lists, loggedInUser}: ListCardDisplayProps) {
+export function ListCardDisplay({lists, loggedInUser, onListDelete, onListArchive}: ListCardDisplayProps) {
     return <div className={styles.display}>
-        {lists.map((it, index)=>(<ListCard key={index} list={it} loggedInUser={loggedInUser}/>))}
+        {lists.map((it, index)=>(<ListCard key={index} list={it} loggedInUser={loggedInUser} onListArchive={onListArchive} onListDelete={onListDelete}/>))}
     </div>
 }

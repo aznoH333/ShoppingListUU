@@ -2,11 +2,14 @@ import {ShoppingListItem} from "@/src/types/ShoppingListItem";
 import {DEBUG_USERS, User} from "@/src/types/User";
 import {ShoppingListUser} from "@/src/types/ShoppingListUser";
 
+
+
 export interface ShoppingList {
     id: number,
     name: string,
     users: ShoppingListUser[],
     items: ShoppingListItem[],
+    state: "active" | "archived"
 }
 
 export const DEBUG_SHOPPING_LIST: ShoppingList = {
@@ -39,6 +42,7 @@ export const DEBUG_SHOPPING_LIST: ShoppingList = {
             state: "checked",
         }
     ],
+    state: "active",
 }
 
 export const MEMBER_SHOPPING_LIST: ShoppingList = {
@@ -71,6 +75,8 @@ export const MEMBER_SHOPPING_LIST: ShoppingList = {
             state: "visible",
         }
     ],
+    state: "active",
+
 }
 
 export const EMPTY_SHOPPING_LIST: ShoppingList = {
@@ -87,6 +93,8 @@ export const EMPTY_SHOPPING_LIST: ShoppingList = {
     items: [
 
     ],
+    state: "active",
+
 }
 
 export function shoppingListGetUserAsListUser(user: User, shoppingList: ShoppingList): ShoppingListUser | undefined {
