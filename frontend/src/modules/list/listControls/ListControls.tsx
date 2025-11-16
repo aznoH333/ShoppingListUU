@@ -92,7 +92,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
             </div>
 
             <div className={styles.headerButtons}>
-                <Button onClick={()=>setEditModalOpen(true)} disabled={!userRights.canEditList}>
+                <Button onClick={()=>setEditModalOpen(true)} disabled={!userRights.canEditList && list.state !== "archived"}>
                     Edit
                 </Button>
                 <Button onClick={()=>{removeUserFromList(loggedInUser.id)}} disabled={!userRights.canLeave}>
@@ -125,7 +125,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
 
         </div>
 
-        {userRights.canAddUsers && (
+        {userRights.canAddUsers && list.state !== "archived" && (
             <div className={styles.userButtonContainer}>
                 <Button onClick={()=>{setUserModalOpen(true)}}>Add user</Button>
             </div>
