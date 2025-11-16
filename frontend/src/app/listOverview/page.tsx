@@ -37,9 +37,18 @@ export default function ListOverview() {
         setOwnedLists(lists);
     }
 
+    const onListAdd = (list: ShoppingList) => {
+        if (list.name === "") {
+            return;
+        }
+        const lists = [...ownedLists];
+        lists.push(list);
+        setOwnedLists(lists);
+    }
+
     return <>
         <Card>
-            <ListOverviewControls loggedInUser={loggedInUser.data}/>
+            <ListOverviewControls loggedInUser={loggedInUser.data} onListAdd={onListAdd}/>
         </Card>
         <Card>
             <ListCardDisplay lists={ownedLists} loggedInUser={loggedInUser.data} onListDelete={onListDelete} onListArchive={onListArchive}/>
