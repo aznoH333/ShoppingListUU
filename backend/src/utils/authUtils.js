@@ -65,4 +65,5 @@ function authenticateMemberOrOwnerOnly(req, res, next) {
 }
 
 
+
 module.exports = {authenticateToken, SECRET_KEY, validateBodySchema, validateParamSchema, authenticateListOwnerOnly, authenticateMemberOrOwnerOnly }

@@ -1,16 +1,5 @@
 const { defineDBSchema } = require("../utils/dbUtils");
 
-
-/*
-{
-  "id": Number,
-  "shoppingListId": Number,
-  "name": String,
-  "quantity": Number,
-  "state": String, // visible, checked
-}
- */
-
 const ShoppingListItemState = {
     VISIBLE: "visible",
     CHECKED: "checked"

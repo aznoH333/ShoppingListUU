@@ -1,10 +1,11 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const {SECRET_KEY} = require("../utils/authUtils");
+const {SECRET_KEY, validateBodySchema} = require("../utils/authUtils");
+const {object, string} = require("yup");
 
 const router = express.Router();
 
-
+const { userService } = require("../services/userService");
 /*
     DEVELOPER NOTE:
     Will be replaced with actual authentication later.
@@ -37,6 +38,39 @@ router.post('/', (req, res) => {
         return res.status(401).json({ message: 'Invalid email or password' });
     }
 });
+
+router.post("/register",
+    validateBodySchema(object({
+        name: string().required(),
+        password: string().required(),
+    })),
+    async (req, res)=> {
+
+        try {
+            await userService.registerUser(req.body.name, req.body.password);
+            return res.sendStatus(200);
+        } catch (e) {
+            return res.status(400).json({ message: e.message });
+        }
+    });
+
+router.get("/login",
+    validateBodySchema(object({
+        name: string().required(),
+        password: string().required(),
+    })),
+    async (req, res)=> {
+
+        const user = await userService.findUserByNameAndPassword(req.body.name, req.body.password);
+
+        if (!user) {
+            res.status(400).json({ message: "User not found"});
+        }
+
+        const token = jwt.sign({ name: user.name, id: user.id }, SECRET_KEY, { expiresIn: '20y' });
+        return res.json({ token: token, name: user.name, id: user.id }).status(200);
+
+    });
 
 
 module.exports = router;
