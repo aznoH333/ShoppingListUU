@@ -13,6 +13,7 @@ export default function ListOverview() {
     const loggedInUser = useLoggedInUser();
 
     const [ownedLists, setOwnedLists] = useState<ShoppingList[]>([DEBUG_SHOPPING_LIST, MEMBER_SHOPPING_LIST, EMPTY_SHOPPING_LIST]);
+    const [listFilter, setListFilter] = useState<"all" | "archived" | "active">("all");
 
 
     if (loggedInUser.data === undefined) {
@@ -46,12 +47,23 @@ export default function ListOverview() {
         setOwnedLists(lists);
     }
 
+    const filteredLists = ownedLists.filter((it)=>{
+        switch (listFilter) {
+            case "all":
+                return true;
+            case "archived":
+                return it.state === "archived";
+            case "active":
+                return it.state === "active";
+        }
+    });
+
     return <>
         <Card>
-            <ListOverviewControls loggedInUser={loggedInUser.data} onListAdd={onListAdd}/>
+            <ListOverviewControls loggedInUser={loggedInUser.data} onListAdd={onListAdd} listFilter={listFilter} setListFilter={setListFilter}/>
         </Card>
         <Card>
-            <ListCardDisplay lists={ownedLists} loggedInUser={loggedInUser.data} onListDelete={onListDelete} onListArchive={onListArchive}/>
+            <ListCardDisplay lists={filteredLists} loggedInUser={loggedInUser.data} onListDelete={onListDelete} onListArchive={onListArchive}/>
         </Card>
     </>
 

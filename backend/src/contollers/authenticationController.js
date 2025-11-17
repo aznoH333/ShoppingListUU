@@ -1,6 +1,6 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const {SECRET_KEY} = require("./authUtils");
+const {SECRET_KEY} = require("../utils/authUtils");
 
 const router = express.Router();
 

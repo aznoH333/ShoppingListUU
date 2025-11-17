@@ -1,5 +1,5 @@
 const express = require("express");
-const {authenticateToken, validateBodySchema, validateParamSchema, authenticateListOwnerOnly} = require("./authUtils");
+const {authenticateToken, validateBodySchema, validateParamSchema, authenticateListOwnerOnly} = require("../utils/authUtils");
 const { object, string, number} = require("yup");
 const router = express.Router({ mergeParams: true });
 

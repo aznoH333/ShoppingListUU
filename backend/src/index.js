@@ -9,10 +9,10 @@ const PORT = 3000;
 app.use(bodyParser.json());
 
 
-const shoppingListsController = require("./shoppingListController");
+const shoppingListsController = require("./contollers/shoppingListController");
 app.use("/shoppingList", shoppingListsController);
 
-const authenticationController = require("./authenticationController");
+const authenticationController = require("./contollers/authenticationController");
 app.use("/auth", authenticationController);
 
 

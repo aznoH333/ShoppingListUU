@@ -12,7 +12,7 @@ export default function Home() {
     >
 
         <div>TODO : home page</div>
-        <Link href={"/listOverview"}>Open list overview</Link>
+        <Link href={"/listOverview"} style={{color: "blue"}}>Open list overview</Link>
         <div>
             NOTE: lists are hardcoded right now. opening a newly created list will result in an infinite loading screen.
         </div>
