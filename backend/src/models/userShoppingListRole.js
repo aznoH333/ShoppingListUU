@@ -9,7 +9,7 @@ const UserShoppingListRole = {
 const UserShoppingListRoleModel = defineDBSchema("UserListRole", {
     userId: { type: String, required: true },
     listId: { type: String, required: true },
-    "userRole": { type: String, enum: Object.values(UserShoppingListRole), required: true },
+    userRole: { type: String, enum: Object.values(UserShoppingListRole), required: true },
 });
 
 

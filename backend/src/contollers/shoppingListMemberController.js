@@ -8,7 +8,7 @@ const router = express.Router({ mergeParams: true });
 router.get("/",
     authenticateToken,
     validateParamSchema(object({
-        listId: number().required()
+        listId: string().required()
     })),
     (req, res)=> {
         res.status(200).json({
@@ -25,10 +25,10 @@ router.get("/",
 router.post("/",
     authenticateToken,
     validateParamSchema(object({
-        listId: number().required()
+        listId: string().required()
     })),
     validateBodySchema(object({
-        userId: number().required()
+        userId: string().required()
     })),
     authenticateListOwnerOnly,
     (req, res)=> {
@@ -39,8 +39,8 @@ router.post("/",
 router.delete("/:userId",
     authenticateToken,
     validateParamSchema(object({
-        listId: number().required(),
-        userId: number().required()
+        listId: string().required(),
+        userId: string().required()
     })),
     authenticateListOwnerOnly,
     (req, res)=> {

@@ -3,6 +3,10 @@ const {authenticateToken, validateBodySchema, validateParamSchema, authenticateL
 const { object, string, number} = require("yup");
 const router = express.Router({ mergeParams: true });
 
+
+const {shoppingListService} = require("../services/shoppingListService");
+const {RESPONSES} = require("../utils/responseUtils")
+
 const postProjectSchema = object({
     name: string().required()
 })
@@ -11,41 +15,43 @@ router.post('/',
     authenticateToken,
     validateBodySchema(postProjectSchema),
     async (req, res) => {
-        return res.status(200).json({ message: 'todo' });
+        try {
+            const list = await shoppingListService.createList(req.body.name, req.user.id);
+            return RESPONSES.OK(res, list);
+
+        }catch (e) {
+            return RESPONSES.EXCEPTION(res, e)
+        }
     }
 );
 
 
-const getProjectSchema = object({
-    listId: number().required()
-})
 router.get("/:listId",
     authenticateToken,
     validateParamSchema(object({
-        listId: number().required()
+        listId: string().required()
     })),
-    validateParamSchema(getProjectSchema),
-    (req, res) => {
-        return res.status(200).json({
-            id: req.params.listId,
-            name: "",
-            state: "",
-        })
+    async (req, res) => {
+
+
+    const list = await shoppingListService.getShoppingListById(req.params.listId);
+
+    if (!list) {
+        return RESPONSES.NOT_FOUND(res);
+    }
+
+    return RESPONSES.OK(res, list);
+
     }
 );
 
 router.get("/",
     authenticateToken,
-    (req, res) => {
-        return res.status(200).json({
-            shoppingLists: [
-                {
-                    id: 0,
-                    name: "",
-                    state: ""
-                }
-            ]
-        })
+    async (req, res) => {
+
+    const lists = await shoppingListService.getListsForUser(req.user.id);
+
+    return RESPONSES.OK(res, lists);
     }
 );
 
@@ -53,15 +59,20 @@ router.get("/",
 router.put("/:listId",
     authenticateToken,
     validateParamSchema(object({
-        listId: number().required()
+        listId: string().required()
     })),
     validateBodySchema(object({
         name: string().required(),
         state: string().required(),
     })),
     authenticateListOwnerOnly,
-    (req, res) => {
-        return res.sendStatus(200);
+    async (req, res) => {
+    try {
+        await shoppingListService.updateList(req.params.listId, req.body.name, req.body.state);
+        return RESPONSES.OK(res);
+    }catch (e) {
+        return RESPONSES.EXCEPTION(res, e)
+    }
     }
 );
 

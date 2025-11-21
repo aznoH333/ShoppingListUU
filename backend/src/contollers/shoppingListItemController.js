@@ -6,7 +6,7 @@ const router = express.Router({ mergeParams: true });
 router.post("/",
     authenticateToken,
     validateParamSchema(object({
-        listId: number().required()
+        listId: string().required()
     })),
     validateBodySchema(object({
         name: string().required(),
@@ -22,7 +22,7 @@ router.post("/",
 router.get("/",
     authenticateToken,
     validateParamSchema(object({
-        listId: number().required()
+        listId: string().required()
     })),
     (req, res) => {
         return res.status(200).json({
@@ -41,8 +41,8 @@ router.get("/",
 router.get("/:itemId",
     authenticateToken,
     validateParamSchema(object({
-        listId: number().required(),
-        itemId: number().required()
+        listId: string().required(),
+        itemId: string().required()
     })),
     (req, res) => {
         return res.status(200).json({
@@ -57,8 +57,8 @@ router.get("/:itemId",
 router.delete("/:itemId",
     authenticateToken,
     validateParamSchema(object({
-        listId: number().required(),
-        itemId: number().required()
+        listId: string().required(),
+        itemId: string().required()
     })),
     authenticateListOwnerOnly,
     (req, res) => {
@@ -69,8 +69,8 @@ router.delete("/:itemId",
 router.put("/:itemId",
     authenticateToken,
     validateParamSchema(object({
-        listId: number().required(),
-        itemId: number().required()
+        listId: string().required(),
+        itemId: string().required()
     })),
     validateBodySchema(object({
         name: string().required(),

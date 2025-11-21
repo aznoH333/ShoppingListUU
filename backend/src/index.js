@@ -22,3 +22,10 @@ app.listen(PORT, () => {
 });
 
 
+// TODO LIST
+// [X] implement shopping list service
+// [ ] implement shopping list roles
+// [ ] implement member service
+// [ ] implement shopping list item service
+// [ ] auth service?
+//

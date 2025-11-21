@@ -3,6 +3,10 @@ const jwt = require("jsonwebtoken");
 // Secret key for JWT
 const SECRET_KEY = 'debug_key';
 
+const { shoppingListService } = require("../services/shoppingListService")
+const {UserShoppingListRole} = require("../models/userShoppingListRole");
+const {RESPONSES} = require("./responseUtils");
+
 function authenticateToken (req, res, next) {
     const token = req.headers['authorization']?.split(' ')[1]; // Get token from Authorization header
 
@@ -45,20 +49,21 @@ function validateParamSchema(schema) {
 }
 
 
-function authenticateListOwnerOnly(req, res, next) {
-    // simulate list ownership. will be replaced with actual logic once the db is implemented
+async function authenticateListOwnerOnly(req, res, next) {
+    const listRole = await shoppingListService.getUserRoleForList(req.params.listId, req.user.id);
 
-    if (parseInt(req.user.id.toString()) !== 1 || parseInt(req.params.listId) !== 1) {
-        return res.status(401).send();
+    if (!listRole || listRole.userRole !== UserShoppingListRole.OWNER) {
+        return RESPONSES.PERMISSION_DENIED(res);
     }
 
     next();
 }
 
-function authenticateMemberOrOwnerOnly(req, res, next) {
-    // simulate list memebership. will be replaced with actual logic once the db is implemented
-    if ((parseInt(req.user.id.toString()) !== 1 && parseInt(req.user.id.toString()) !== 2) || parseInt(req.params.listId) !== 1) {
-        return res.status(401).send();
+async function authenticateMemberOrOwnerOnly(req, res, next) {
+    const listRole = await shoppingListService.getUserRoleForList(req.params.listId, req.user.id);
+
+    if (listRole || (listRole.userRole !== UserShoppingListRole.OWNER && listRole.userRole !== UserShoppingListRole.MEMBER)) {
+        return RESPONSES.PERMISSION_DENIED(res);
     }
 
     next();
