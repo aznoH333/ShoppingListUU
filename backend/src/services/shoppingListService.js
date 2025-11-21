@@ -2,6 +2,7 @@
 const { userService } = require("./userService");
 const {ShoppingListModel, ShoppingListState} = require("../models/shoppingList");
 const {UserShoppingListRole, UserShoppingListRoleModel} = require("../models/userShoppingListRole");
+const {ShoppingListItemModel} = require("../models/shoppingListItem");
 
 class ShoppingListService {
     async createList(name, ownerId) {
@@ -66,6 +67,13 @@ class ShoppingListService {
         }catch (e) {
             return undefined;
         }
+    }
+
+    async deleteShoppingList(listId) {
+        await UserShoppingListRoleModel.deleteMany({ listId: listId });
+        await ShoppingListItemModel.deleteMany({listId: listId});
+        await ShoppingListModel.deleteOne({_id: listId});
+
     }
 }
 

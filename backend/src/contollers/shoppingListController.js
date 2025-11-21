@@ -80,11 +80,16 @@ router.put("/:listId",
 router.delete("/:listId",
     authenticateToken,
     validateParamSchema(object({
-        listId: number().required()
+        listId: string().required()
     })),
     authenticateListOwnerOnly,
-    (req, res) => {
-        return res.sendStatus(200);
+    async (req, res) => {
+        try {
+            await shoppingListService.deleteShoppingList(req.params.listId);
+            return RESPONSES.OK(res);
+        }catch (e) {
+            return RESPONSES.EXCEPTION(res, e);
+        }
     }
 );
 
