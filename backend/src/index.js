@@ -26,6 +26,6 @@ app.listen(PORT, () => {
 // [X] implement shopping list service
 // [X] implement shopping list roles
 // [ ] implement member service
-// [ ] implement shopping list item service
+// [X] implement shopping list item service
 // [ ] auth service?
 //

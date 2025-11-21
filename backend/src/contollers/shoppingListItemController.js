@@ -3,6 +3,10 @@ const {authenticateToken, validateBodySchema, validateParamSchema, authenticateL
 const { object, string, number} = require("yup");
 const router = express.Router({ mergeParams: true });
 
+
+const {shoppingListItemService} = require("../services/shoppingListItemService");
+const {RESPONSES} = require("../utils/responseUtils");
+
 router.post("/",
     authenticateToken,
     validateParamSchema(object({
@@ -13,8 +17,13 @@ router.post("/",
         quantity: number().required().min(1).max(999)
     })),
     authenticateListOwnerOnly,
-    (req, res) => {
-        return res.sendStatus(200);
+    async (req, res) => {
+        try {
+            await shoppingListItemService.createShoppingListItem(req.params.listId, req.body.name, req.body.quantity);
+            return RESPONSES.OK(res);
+        }catch (e) {
+            return RESPONSES.EXCEPTION(res, e);
+        }
     }
 );
 
@@ -24,18 +33,12 @@ router.get("/",
     validateParamSchema(object({
         listId: string().required()
     })),
-    (req, res) => {
-        return res.status(200).json({
-            items: [
-                {
-                    id: 0,
-                    shoppingListId: req.params.listId,
-                    name: "",
-                    quantity: 1,
-                    state: "",
-                }
-            ]
-        })
+    async (req, res) => {
+        try {
+            return RESPONSES.OK(res, await shoppingListItemService.getShoppingListItems(req.params.listId));
+        }catch (e) {
+            return RESPONSES.NOT_FOUND(res);
+        }
     });
 
 router.get("/:itemId",
@@ -44,14 +47,12 @@ router.get("/:itemId",
         listId: string().required(),
         itemId: string().required()
     })),
-    (req, res) => {
-        return res.status(200).json({
-            id: 0,
-            shoppingListId: req.params.listId,
-            name: "",
-            quantity: 1,
-            state: "",
-        });
+    async (req, res) => {
+        try {
+            return RESPONSES.OK(res, await shoppingListItemService.getShoppingListItemById(req.params.itemId));
+        }catch (e) {
+            return RESPONSES.NOT_FOUND(res);
+        }
     });
 
 router.delete("/:itemId",
@@ -61,8 +62,12 @@ router.delete("/:itemId",
         itemId: string().required()
     })),
     authenticateListOwnerOnly,
-    (req, res) => {
-        return res.sendStatus(200);
+    async (req, res) => {
+        try {
+            return RESPONSES.OK(res, await shoppingListItemService.deleteShoppingListItem(req.params.itemId));
+        }catch (e) {
+            return RESPONSES.EXCEPTION(res, e);
+        }
     }
 )
 
@@ -78,8 +83,13 @@ router.put("/:itemId",
         state: string().required()
     })),
     authenticateListOwnerOnly,
-    (req, res) => {
-        return res.sendStatus(200);
+    async (req, res) => {
+        try {
+            await shoppingListItemService.updateShoppingListItem(req.params.itemId, req.body.name, req.body.quantity, req.body.state);
+            return RESPONSES.OK(res);
+        }catch (e) {
+            return RESPONSES.EXCEPTION(res, e);
+        }
     }
 )
 
