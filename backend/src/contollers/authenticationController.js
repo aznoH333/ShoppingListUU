@@ -6,6 +6,7 @@ const {object, string} = require("yup");
 const router = express.Router();
 
 const { userService } = require("../services/userService");
+const {RESPONSES} = require("../utils/responseUtils");
 /*
     DEVELOPER NOTE:
     Will be replaced with actual authentication later.
@@ -72,5 +73,13 @@ router.get("/login",
 
     });
 
+
+router.get('/',
+    async (req, res) => {
+
+    return RESPONSES.OK(res, await userService.getAllUsers());
+
+    }
+);
 
 module.exports = router;

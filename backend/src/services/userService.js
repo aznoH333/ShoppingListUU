@@ -1,5 +1,6 @@
 const {generateHash} = require("../utils/stringUtils");
 const { UserModel } = require("../models/user")
+const {ShoppingListModel} = require("../models/shoppingList");
 
 
 class UserService {
@@ -48,6 +49,32 @@ class UserService {
 
 
         await this.createNewUser(name, password);
+    }
+
+    async getUserListMembers(userRoles) {
+        const ids = userRoles.map((it)=>it.userId);
+
+        const users = await UserModel.find({_id: {$in: ids}});
+
+        return users.map((it)=> {
+            return {
+                _id: it._id,
+                name: it.name,
+                role: userRoles.find((role)=>it._id == role.userId).userRole,
+            };
+        });
+
+    }
+
+    async getAllUsers() {
+        const users = await UserModel.find({})
+
+        return users.map((it)=>{
+            return {
+                _id: it._id,
+                name: it.name
+            };
+        });
     }
 }
 

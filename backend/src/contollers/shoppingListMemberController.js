@@ -1,25 +1,19 @@
 const express = require("express");
 const {authenticateToken, validateBodySchema, validateParamSchema, authenticateListOwnerOnly} = require("../utils/authUtils");
 const { object, string, number} = require("yup");
+const {RESPONSES} = require("../utils/responseUtils");
 const router = express.Router({ mergeParams: true });
 
 
+const {shoppingListMemberService} = require("../services/shoppingListMemberService");
 
 router.get("/",
     authenticateToken,
     validateParamSchema(object({
         listId: string().required()
     })),
-    (req, res)=> {
-        res.status(200).json({
-            members: [
-                {
-                    userId: 1,
-                    name: "abc",
-                    role: "owner",
-                }
-            ]
-        });
+    async (req, res)=> {
+        return RESPONSES.OK(res, await shoppingListMemberService.getListMembers(req.params.listId)); // TODO : this isn't ideal
     });
 
 router.post("/",
@@ -31,8 +25,13 @@ router.post("/",
         userId: string().required()
     })),
     authenticateListOwnerOnly,
-    (req, res)=> {
-        res.sendStatus(200)
+    async (req, res)=> {
+        try {
+            await shoppingListMemberService.addMemberToList(req.params.listId, req.body.userId);
+            return RESPONSES.OK(res);
+        } catch (e) {
+            return RESPONSES.EXCEPTION(res, e);
+        }
     });
 
 
@@ -43,8 +42,13 @@ router.delete("/:userId",
         userId: string().required()
     })),
     authenticateListOwnerOnly,
-    (req, res)=> {
-        res.sendStatus(200)
+    async (req, res)=> {
+        try {
+            await shoppingListMemberService.removeMemberFromList(req.params.listId, req.params.userId);
+            return RESPONSES.OK(res);
+        } catch (e) {
+            return RESPONSES.EXCEPTION(res, e);
+        }
     });
 
 module.exports = router;
