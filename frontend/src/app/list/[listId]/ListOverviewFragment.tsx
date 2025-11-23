@@ -21,8 +21,8 @@ export function ListOverviewFragment({ listId }: ListOverviewFragmentProps) {
 
     if (loadingUser || errorUser || !user || !list || !updateList) {
         return <>
-            <LoadingCard heightPx={64} error={errorUser}/>
-            <LoadingCard heightPx={128} error={errorUser}/>
+            <LoadingCard heightPx={174} error={errorUser}/>
+            <LoadingCard heightPx={381} error={errorUser}/>
         </>
     }
 

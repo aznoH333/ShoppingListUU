@@ -17,7 +17,6 @@ interface ListControlsProps {
 }
 
 export function ListControls({loggedInUser, list, updateList}: ListControlsProps){
-    console.debug(list);
     const listUser = shoppingListGetUserAsListUser(loggedInUser, list);
     const users = useApplicationUsers().get();
 
@@ -43,17 +42,14 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
         setEditModalOpen(false);
     }
 
-    const addUserToList = (pickedUserId: number) => {
+    const addUserToList = (pickedUserId: string) => {
         const userToAdd = users.find((it)=>it._id === pickedUserId);
 
         if (!userToAdd) {
             return;
         }
 
-        const userMembershipId = list.users.length > 0 ? list.users
-                .map((it)=>it._id)
-                .reduce((it,acc)=>Math.max(it, acc)) + 1 :
-            0;
+        const userMembershipId = Math.random().toString(); // UUID for poor people
 
         updateList({
             ...list,
@@ -67,7 +63,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
         setUserModalOpen(false);
     }
 
-    const removeUserFromList = (userId: number) => {
+    const removeUserFromList = (userId: string) => {
 
         updateList({
             ...list,
@@ -80,7 +76,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
         userRights.canRemoveUsers ? {
             label: "kick",
             function: removeUserFromList,
-            dontShowForUsers: [listUser?._id ?? 0]
+            dontShowForUsers: [listUser?._id ?? ""]
         } : undefined
 
     return <Card>

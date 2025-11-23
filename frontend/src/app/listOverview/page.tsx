@@ -13,7 +13,7 @@ import {LoadingCard} from "@/src/modules/loadingCard/LoadingCard";
 export default function ListOverview() {
     const loggedInUser = useLoggedInUser();
 
-    const {data: ownedLists, setData: setOwnedLists, error, loading} = useLists();
+    const {data: ownedLists, setData: setOwnedLists, error, loading, addList} = useLists();
 
     // const [ownedLists, setOwnedLists] = useState<ShoppingList[]>([DEBUG_SHOPPING_LIST, MEMBER_SHOPPING_LIST, EMPTY_SHOPPING_LIST]);
     const [listFilter, setListFilter] = useState<"all" | "archived" | "active">("all");
@@ -54,9 +54,12 @@ export default function ListOverview() {
         if (list.name === "") {
             return;
         }
-        const lists = [...ownedLists];
-        lists.push(list);
-        setOwnedLists(lists);
+        addList(list).then(()=>{
+            const lists = [...ownedLists];
+            lists.push(list);
+            setOwnedLists(lists);
+        })
+
     }
 
     const filteredLists = ownedLists.filter((it)=>{

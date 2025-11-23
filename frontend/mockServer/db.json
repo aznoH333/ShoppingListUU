@@ -1,24 +1,19 @@
 {
-  "lists": [
-    { "id": 1, "name": "Item One" },
-    { "id": 2, "name": "Item Two" }
-  ],
-
-
   "shoppingList": [
     {
       "id": "69207b922f25bf4e99fe4466",
       "_id": "69207b922f25bf4e99fe4466",
       "name": "bbbb",
       "state": "active",
-      "users": [{
-        "user": {
-          "_id": "691b366b2774443334e5e0cd",
-          "name": "testuser"
-        },
-
-        "role": "owner"
-      }],
+      "users": [
+        {
+          "user": {
+            "_id": "691b366b2774443334e5e0cd",
+            "name": "testuser"
+          },
+          "role": "owner"
+        }
+      ],
       "items": [
         {
           "_id": "69208741e8831437184acc55",
@@ -68,70 +63,17 @@
       "_id": "6921b16ae152cd26ce89a8e3",
       "name": "cccc",
       "state": "active",
-      "users": [{
-        "user": {
-          "_id": "691b366b2774443334e5e0cd",
-          "name": "testuser"
-        },
-
-        "role": "owner"
-      }],
+      "users": [
+        {
+          "user": {
+            "_id": "691b366b2774443334e5e0cd",
+            "name": "testuser"
+          },
+          "role": "owner"
+        }
+      ],
       "items": [],
       "__v": 0
     }
-  ],
-
-  "items": [
-    {
-      "id": "69207b922f25bf4e99fe4466",
-      "items": [
-      {
-        "_id": "69208741e8831437184acc55",
-        "shoppingListId": "69207b922f25bf4e99fe4466",
-        "name": "edited",
-        "quantity": 4,
-        "state": "checked",
-        "__v": 0
-      },
-      {
-        "_id": "69208742e8831437184acc59",
-        "shoppingListId": "69207b922f25bf4e99fe4466",
-        "name": "abcde",
-        "quantity": 4,
-        "state": "visible",
-        "__v": 0
-      },
-      {
-        "_id": "69208742e8831437184acc5d",
-        "shoppingListId": "69207b922f25bf4e99fe4466",
-        "name": "abcde",
-        "quantity": 4,
-        "state": "visible",
-        "__v": 0
-      },
-      {
-        "_id": "69208742e8831437184acc61",
-        "shoppingListId": "69207b922f25bf4e99fe4466",
-        "name": "abcde",
-        "quantity": 4,
-        "state": "visible",
-        "__v": 0
-      },
-      {
-        "_id": "69208742e8831437184acc65",
-        "shoppingListId": "69207b922f25bf4e99fe4466",
-        "name": "abcde",
-        "quantity": 4,
-        "state": "visible",
-        "__v": 0
-      }]
-    },
-    {
-      "id": "6921b16ae152cd26ce89a8e3",
-      "items": [
-        ]
-    }
   ]
-
-
 }

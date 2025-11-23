@@ -7,8 +7,8 @@ import styles from "./UserList.module.css"
 
 export interface UserListButton {
     label: string,
-    function: (id: number)=>void,
-    dontShowForUsers?: number[], // an array of ids of users for which the buttons shouldn't display
+    function: (id: string)=>void,
+    dontShowForUsers?: string[], // an array of ids of users for which the buttons shouldn't display
 }
 
 
@@ -24,7 +24,7 @@ export function UserList({ users, buttons }: UserListProps) {
                 const isShoppingListUser = 'role' in it; // Check if userItem is ShoppingListUser
                 return (
                     <UserCard
-                        key={isShoppingListUser ? it.user.id : it._id}
+                        key={isShoppingListUser ? it.user._id : it._id}
                         user={isShoppingListUser ? it.user : it}
                         userRole={isShoppingListUser ? it.role : undefined}
                         button={buttons}

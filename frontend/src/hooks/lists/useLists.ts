@@ -26,11 +26,46 @@ export function useLists() {
 
     }, []);
 
+    const addList = async (list: ShoppingList) => {
+        try {
+            const response = await fetch('http://localhost:3000/shoppingList', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({...list, _id: list.id}),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('New list added:', data);
+            }
+        } catch (error) {
+            console.error('Error adding list:', error);
+        }
+    }
+
+    const deleteList = async (listId: string) => {
+        try {
+            const response = await fetch(`http://localhost:3000/shoppingList/${listId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('List deleted');
+            }
+        } catch (error) {
+            console.error('Error deleting list:', error);
+        }
+    }
 
     return {
         data,
         setData,
         loading,
-        error
+        error,
+        addList,
+        deleteList
     }
 }
