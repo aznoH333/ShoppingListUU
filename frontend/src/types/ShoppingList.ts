@@ -11,80 +11,18 @@ export interface ShoppingList {
     state: "active" | "archived"
 }
 
-export const DEBUG_SHOPPING_LIST: ShoppingList = {
-    id: 0,
-    name: "debug list",
-    users: [
-        {
-            _id: 0,
-            user: DEBUG_USERS[0],
-            role: "owner",
-        },
-        {
-            _id: 1,
-            user: DEBUG_USERS[1],
-            role: "member",
-        }
-    ],
 
-    items: [
-        {
-            id: 0,
-            name: "beans",
-            quantity: 2,
-            state: "visible",
-        },
-        {
-            id: 1,
-            name: "sunflower oil",
-            quantity: 1,
-            state: "checked",
-        }
-    ],
-    state: "active",
-}
-
-export const MEMBER_SHOPPING_LIST: ShoppingList = {
-    id: 1,
-    name: "debug list 2",
-    users: [
-        {
-            _id: 0,
-            user: DEBUG_USERS[0],
-            role: "member",
-        },
-        {
-            _id: 1,
-            user: DEBUG_USERS[1],
-            role: "owner",
-        }
-    ],
-
-    items: [
-        {
-            id: 0,
-            name: "AAAAAAAAAAAAAAAAAAA!!!!!!",
-            quantity: 2,
-            state: "visible",
-        },
-        {
-            id: 1,
-            name: "item",
-            quantity: 10,
-            state: "visible",
-        }
-    ],
-    state: "active",
-
-}
 
 export const EMPTY_SHOPPING_LIST: ShoppingList = {
     id: 2,
     name: "new list",
     users: [
         {
-            _id: 0,
-            user: DEBUG_USERS[0],
+            _id: "691b366b2774443334e5e0cd",
+            user: {
+                _id: "691b366b2774443334e5e0cd",
+                name: "testUser",
+            },
             role: "owner",
         },
     ],
@@ -97,5 +35,8 @@ export const EMPTY_SHOPPING_LIST: ShoppingList = {
 }
 
 export function shoppingListGetUserAsListUser(user: User, shoppingList: ShoppingList): ShoppingListUser | undefined {
-    return shoppingList.users.find((it)=> it._id === user._id );
+
+    console.debug(user);
+
+    return shoppingList.users.find((it)=> it.user._id === user._id );
 }

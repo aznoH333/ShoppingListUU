@@ -12,7 +12,6 @@ export function useLists() {
         const fetchShoppingList = async () => {
             const response = await fetch(`http://localhost:3000/shoppingList/`);
             const data = await response.json();
-            console.debug(data);
             setData(data);
         };
 

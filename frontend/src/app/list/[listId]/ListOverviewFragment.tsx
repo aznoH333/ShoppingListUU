@@ -14,7 +14,6 @@ interface ListOverviewFragmentProps {
 
 export function ListOverviewFragment({ listId }: ListOverviewFragmentProps) {
 
-    console.debug(listId);
     const { data: list, setData: updateList, loading: loadingUser, error: errorUser } = useList(listId);
     const { data: user } = useLoggedInUser();
 

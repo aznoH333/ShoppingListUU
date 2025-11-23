@@ -9,6 +9,7 @@
         {
           "user": {
             "_id": "691b366b2774443334e5e0cd",
+            "id": "691b366b2774443334e5e0cd",
             "name": "testuser"
           },
           "role": "owner"
@@ -25,6 +26,8 @@
         },
         {
           "_id": "69208742e8831437184acc59",
+          "id": "691b366b2774443334e5e0cd",
+
           "shoppingListId": "69207b922f25bf4e99fe4466",
           "name": "abcde",
           "quantity": 4,
@@ -33,6 +36,8 @@
         },
         {
           "_id": "69208742e8831437184acc5d",
+          "id": "691b366b2774443334e5e0cd",
+
           "shoppingListId": "69207b922f25bf4e99fe4466",
           "name": "abcde",
           "quantity": 4,
@@ -41,6 +46,8 @@
         },
         {
           "_id": "69208742e8831437184acc61",
+          "id": "691b366b2774443334e5e0cd",
+
           "shoppingListId": "69207b922f25bf4e99fe4466",
           "name": "abcde",
           "quantity": 4,
@@ -49,6 +56,8 @@
         },
         {
           "_id": "69208742e8831437184acc65",
+          "id": "691b366b2774443334e5e0cd",
+
           "shoppingListId": "69207b922f25bf4e99fe4466",
           "name": "abcde",
           "quantity": 4,
@@ -67,6 +76,8 @@
         {
           "user": {
             "_id": "691b366b2774443334e5e0cd",
+            "id": "691b366b2774443334e5e0cd",
+
             "name": "testuser"
           },
           "role": "owner"
@@ -74,6 +85,19 @@
       ],
       "items": [],
       "__v": 0
+    }
+  ],
+  "users": [
+    {
+      "_id": "691b366b2774443334e5e0cd",
+      "id": "691b366b2774443334e5e0cd",
+
+      "name": "testuser"
+    },
+    {
+      "_id": "6921aae96ce0c7bc85e06e5f",
+      "id": "6921aae96ce0c7bc85e06e5f",
+      "name": "testuser2"
     }
   ]
 }
