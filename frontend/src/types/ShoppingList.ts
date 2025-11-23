@@ -16,12 +16,12 @@ export const DEBUG_SHOPPING_LIST: ShoppingList = {
     name: "debug list",
     users: [
         {
-            id: 0,
+            _id: 0,
             user: DEBUG_USERS[0],
             role: "owner",
         },
         {
-            id: 1,
+            _id: 1,
             user: DEBUG_USERS[1],
             role: "member",
         }
@@ -49,12 +49,12 @@ export const MEMBER_SHOPPING_LIST: ShoppingList = {
     name: "debug list 2",
     users: [
         {
-            id: 0,
+            _id: 0,
             user: DEBUG_USERS[0],
             role: "member",
         },
         {
-            id: 1,
+            _id: 1,
             user: DEBUG_USERS[1],
             role: "owner",
         }
@@ -83,7 +83,7 @@ export const EMPTY_SHOPPING_LIST: ShoppingList = {
     name: "new list",
     users: [
         {
-            id: 0,
+            _id: 0,
             user: DEBUG_USERS[0],
             role: "owner",
         },
@@ -97,5 +97,5 @@ export const EMPTY_SHOPPING_LIST: ShoppingList = {
 }
 
 export function shoppingListGetUserAsListUser(user: User, shoppingList: ShoppingList): ShoppingListUser | undefined {
-    return shoppingList.users.find((it)=> it.id === user.id );
+    return shoppingList.users.find((it)=> it._id === user._id );
 }

@@ -1,16 +1,43 @@
-import {DEBUG_SHOPPING_LIST, EMPTY_SHOPPING_LIST, MEMBER_SHOPPING_LIST, ShoppingList} from "@/src/types/ShoppingList";
-import {useState} from "react";
+import {ShoppingList} from "@/src/types/ShoppingList";
+import {useEffect, useState} from "react";
 
 
-export function useList(listId: number) {
+export function useList(listId: string) {
 
-    const lists = [
-        DEBUG_SHOPPING_LIST,
-        MEMBER_SHOPPING_LIST,
-        EMPTY_SHOPPING_LIST,
-    ]
+    const [data, setData] = useState<ShoppingList|undefined>(undefined);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | undefined>(undefined);
 
-    const [data, setData] = useState<ShoppingList | undefined>(listId > lists.length ? EMPTY_SHOPPING_LIST : lists[listId]);
+
+
+    useEffect(() => {
+
+        const fetchShoppingList = async () => {
+            const response = await fetch(`http://localhost:3000/shoppingList/${listId}`);
+            const data = await response.json();
+            console.debug(data);
+            setData(data);
+        };
+
+        fetchShoppingList().catch((e)=> {
+            setLoading(false);
+            console.error(e);
+            setError(e);
+        }).then(()=>{
+            setLoading(false);
+
+        });
+
+    }, []);
+
+
+    return {
+        data,
+        setData,
+        loading,
+        error
+    }
+
 
 
 

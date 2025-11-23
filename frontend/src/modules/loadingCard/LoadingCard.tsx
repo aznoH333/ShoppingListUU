@@ -27,8 +27,6 @@ export function LoadingCard({error, heightPx = 200}: LoadingCardProps) {
             height: heightPx,
         }}>
             <div className={styles.error}>💀 Error</div>
-            <div className={styles.text}>{error}</div>
-
         </div>
 
     </Card>

@@ -12,8 +12,11 @@
       "name": "bbbb",
       "state": "active",
       "users": [{
-        "_id": "691b366b2774443334e5e0cd",
-        "name": "testuser",
+        "user": {
+          "_id": "691b366b2774443334e5e0cd",
+          "name": "testuser"
+        },
+
         "role": "owner"
       }],
       "items": [
@@ -66,8 +69,11 @@
       "name": "cccc",
       "state": "active",
       "users": [{
-        "_id": "691b366b2774443334e5e0cd",
-        "name": "testuser",
+        "user": {
+          "_id": "691b366b2774443334e5e0cd",
+          "name": "testuser"
+        },
+
         "role": "owner"
       }],
       "items": [],

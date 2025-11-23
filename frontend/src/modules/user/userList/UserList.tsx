@@ -24,7 +24,7 @@ export function UserList({ users, buttons }: UserListProps) {
                 const isShoppingListUser = 'role' in it; // Check if userItem is ShoppingListUser
                 return (
                     <UserCard
-                        key={isShoppingListUser ? it.user.id : it.id}
+                        key={isShoppingListUser ? it.user.id : it._id}
                         user={isShoppingListUser ? it.user : it}
                         userRole={isShoppingListUser ? it.role : undefined}
                         button={buttons}

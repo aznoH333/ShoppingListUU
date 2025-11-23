@@ -5,7 +5,7 @@ export type UserRole = "owner" | "member" | "visitor"
 
 
 export interface ShoppingListUser {
-    id: number,
+    _id: string,
     user: User,
     role: UserRole,
 }

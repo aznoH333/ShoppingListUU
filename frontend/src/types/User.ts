@@ -1,21 +1,21 @@
 export interface User{
-    id: number,
+    _id: string,
     name: string,
 }
 
 export const DEBUG_USER: User = {
-    id: 0,
+    _id: "0",
     name: "Logged in test user",
 }
 
 export const DEBUG_USERS: User[] = [
     DEBUG_USER,
     {
-        id: 1,
+        _id: "1",
         name: "ABC DEF"
     },
     {
-        id: 2,
+        _id: "2",
         name: "GHI JKL"
     }
 ];

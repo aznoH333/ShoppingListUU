@@ -5,22 +5,25 @@ import {useLoggedInUser} from "@/src/hooks/users/useLoggedInUser";
 import {Card} from "@/src/modules/card/Card";
 import {ListControls} from "@/src/modules/list/listControls/ListControls";
 import {ListItems} from "@/src/modules/list/listItems/ListItems";
+import {LoadingCard} from "@/src/modules/loadingCard/LoadingCard";
 
 
 interface ListOverviewFragmentProps {
-    listId: number
+    listId: string
 }
 
 export function ListOverviewFragment({ listId }: ListOverviewFragmentProps) {
 
-    const { data: list, update: updateList } = useList(listId);
+    console.debug(listId);
+    const { data: list, setData: updateList, loading: loadingUser, error: errorUser } = useList(listId);
     const { data: user } = useLoggedInUser();
 
 
-    if (!list || !user) {
-        return <Card>
-            loading...
-        </Card>
+    if (loadingUser || errorUser || !user || !list || !updateList) {
+        return <>
+            <LoadingCard heightPx={64} error={errorUser}/>
+            <LoadingCard heightPx={128} error={errorUser}/>
+        </>
     }
 
 

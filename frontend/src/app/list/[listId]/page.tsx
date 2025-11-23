@@ -13,12 +13,6 @@ interface ListPageProps {
 
 export default async function ListOverviewPage({params}: ListPageProps) {
     const { listId } = await params;
-    // Parse the string to a number
-    const listIdNumber = parseInt(listId as string, 10);
-    // Handle invalid number case
-    if (isNaN(listIdNumber)) {
-        return <div>Error: Invalid List ID diaosdoasduioyasyioduasoid {listId} : {listIdNumber}</div>;
-    }
 
-    return <ListOverviewFragment listId={listIdNumber} />;
+    return <ListOverviewFragment listId={listId} />;
 }

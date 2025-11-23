@@ -13,19 +13,19 @@ import {getUserRightsForAList} from "@/src/types/ShoppingListUser";
 interface ListControlsProps {
     loggedInUser: User,
     list: ShoppingList,
-    updateList: (list: ShoppingList) => void
+    updateList: (list: ShoppingList | undefined) => void
 }
 
 export function ListControls({loggedInUser, list, updateList}: ListControlsProps){
-
+    console.debug(list);
     const listUser = shoppingListGetUserAsListUser(loggedInUser, list);
     const users = useApplicationUsers().get();
 
 
 
     const userRights = getUserRightsForAList(listUser);
-    const listUserIds = list.users.map((it)=>it.user.id);
-    const possibleUsersToAdd = users.filter((it)=>!listUserIds.includes(it.id));
+    const listUserIds = list.users.map((it)=>it.user._id);
+    const possibleUsersToAdd = users.filter((it)=>!listUserIds.includes(it._id));
 
     const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
     const [nameEdit, setNameEdit] = useState(list.name);
@@ -44,21 +44,21 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
     }
 
     const addUserToList = (pickedUserId: number) => {
-        const userToAdd = users.find((it)=>it.id === pickedUserId);
+        const userToAdd = users.find((it)=>it._id === pickedUserId);
 
         if (!userToAdd) {
             return;
         }
 
         const userMembershipId = list.users.length > 0 ? list.users
-                .map((it)=>it.id)
+                .map((it)=>it._id)
                 .reduce((it,acc)=>Math.max(it, acc)) + 1 :
             0;
 
         updateList({
             ...list,
             users: [...list.users, {
-                id: userMembershipId,
+                _id: userMembershipId,
                 role: "member",
                 user: userToAdd
             } ]
@@ -71,7 +71,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
 
         updateList({
             ...list,
-            users: list.users.filter((it)=>it.user.id !== userId)
+            users: list.users.filter((it)=>it.user._id !== userId)
         });
     }
 
@@ -80,7 +80,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
         userRights.canRemoveUsers ? {
             label: "kick",
             function: removeUserFromList,
-            dontShowForUsers: [listUser?.id ?? 0]
+            dontShowForUsers: [listUser?._id ?? 0]
         } : undefined
 
     return <Card>
@@ -95,7 +95,7 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
                 <Button onClick={()=>setEditModalOpen(true)} disabled={!userRights.canEditList && list.state !== "archived"}>
                     Edit
                 </Button>
-                <Button onClick={()=>{removeUserFromList(loggedInUser.id)}} disabled={!userRights.canLeave}>
+                <Button onClick={()=>{removeUserFromList(loggedInUser._id)}} disabled={!userRights.canLeave}>
                     Leave
                 </Button>
             </div>
