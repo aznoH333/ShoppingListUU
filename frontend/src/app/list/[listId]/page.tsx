@@ -1,8 +1,7 @@
 import {ListOverviewFragment} from "@/src/app/list/[listId]/ListOverviewFragment";
 
 export async function generateStaticParams() {
-    const maxListId = 10; // TODO : this sucks but i am too lazy to figure out a better solution xdd
-    const listIds = Array.from({ length: maxListId + 1 }, (_, index) => `${index}`);
+    const listIds = ["69207b922f25bf4e99fe4466", "6921b16ae152cd26ce89a8e3"]; // TODO : this sucks but it has to be here to make the static export work
     return listIds.map(id => ({ listId: id }));
 }
 

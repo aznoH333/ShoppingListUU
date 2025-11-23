@@ -3,7 +3,6 @@ import {DEBUG_USERS, User} from "@/src/types/User";
 import {ShoppingListUser} from "@/src/types/ShoppingListUser";
 
 
-
 export interface ShoppingList {
     id: number,
     name: string,

@@ -2,17 +2,20 @@
 
 import {Card} from "@/src/modules/card/Card";
 import {useLoggedInUser} from "@/src/hooks/users/useLoggedInUser";
-import {DEBUG_SHOPPING_LIST, EMPTY_SHOPPING_LIST, MEMBER_SHOPPING_LIST, ShoppingList} from "@/src/types/ShoppingList";
-import {ListCard} from "@/src/modules/listOverview/listCard/ListCard";
+import {ShoppingList} from "@/src/types/ShoppingList";
 import {ListCardDisplay} from "@/src/modules/listOverview/listCardDisplay/ListCardDisplay";
 import {ListOverviewControls} from "@/src/modules/listOverview/listOverviewControlls/ListOverviewControls";
 import {useState} from "react";
+import {useLists} from "@/src/hooks/lists/useLists";
+import {LoadingCard} from "@/src/modules/loadingCard/LoadingCard";
 
 
 export default function ListOverview() {
     const loggedInUser = useLoggedInUser();
 
-    const [ownedLists, setOwnedLists] = useState<ShoppingList[]>([DEBUG_SHOPPING_LIST, MEMBER_SHOPPING_LIST, EMPTY_SHOPPING_LIST]);
+    const {data: ownedLists, setData: setOwnedLists, error, loading} = useLists();
+
+    // const [ownedLists, setOwnedLists] = useState<ShoppingList[]>([DEBUG_SHOPPING_LIST, MEMBER_SHOPPING_LIST, EMPTY_SHOPPING_LIST]);
     const [listFilter, setListFilter] = useState<"all" | "archived" | "active">("all");
 
 
@@ -21,6 +24,15 @@ export default function ListOverview() {
             TODO : redirect to homepage/login?
         </div>
     }
+
+
+    if (loading || error) {
+        return <>
+            <LoadingCard heightPx={61}/>
+            <LoadingCard heightPx={150}/>
+        </>
+    }
+
 
     const onListDelete = (listId: number)=> {
         setOwnedLists(ownedLists.filter((it)=>it.id !== listId));
