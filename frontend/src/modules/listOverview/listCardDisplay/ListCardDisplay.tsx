@@ -6,8 +6,8 @@ import {ListCard} from "@/src/modules/listOverview/listCard/ListCard";
 interface ListCardDisplayProps {
     lists: ShoppingList[],
     loggedInUser: User,
-    onListDelete: (listId: number)=>void;
-    onListArchive: (listId: number)=>void;
+    onListDelete: (listId: string)=>void;
+    onListArchive: (listId: string)=>void;
 }
 export function ListCardDisplay({lists, loggedInUser, onListDelete, onListArchive}: ListCardDisplayProps) {
     return <div className={styles.display}>

@@ -4,7 +4,7 @@ import {ShoppingListUser} from "@/src/types/ShoppingListUser";
 
 
 export interface ShoppingList {
-    id: number,
+    id: string,
     name: string,
     users: ShoppingListUser[],
     items: ShoppingListItem[],
@@ -14,7 +14,7 @@ export interface ShoppingList {
 
 
 export const EMPTY_SHOPPING_LIST: ShoppingList = {
-    id: 2,
+    id: "3",
     name: "new list",
     users: [
         {

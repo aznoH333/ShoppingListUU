@@ -13,9 +13,8 @@ import {LoadingCard} from "@/src/modules/loadingCard/LoadingCard";
 export default function ListOverview() {
     const loggedInUser = useLoggedInUser();
 
-    const {data: ownedLists, setData: setOwnedLists, error, loading, addList} = useLists();
+    const {data: ownedLists, setData: setOwnedLists, error, loading, addList, deleteList, updateList} = useLists();
 
-    // const [ownedLists, setOwnedLists] = useState<ShoppingList[]>([DEBUG_SHOPPING_LIST, MEMBER_SHOPPING_LIST, EMPTY_SHOPPING_LIST]);
     const [listFilter, setListFilter] = useState<"all" | "archived" | "active">("all");
 
 
@@ -34,11 +33,13 @@ export default function ListOverview() {
     }
 
 
-    const onListDelete = (listId: number)=> {
-        setOwnedLists(ownedLists.filter((it)=>it.id !== listId));
+    const onListDelete = (listId: string)=> {
+        deleteList(listId).then(()=> {
+            setOwnedLists(ownedLists.filter((it)=>it.id !== listId));
+        });
     }
 
-    const onListArchive = (listId: number) => {
+    const onListArchive = (listId: string) => {
         const lists = [...ownedLists];
 
         const list = lists.find((it)=>it.id === listId);
@@ -47,7 +48,10 @@ export default function ListOverview() {
             return;
         }
         list.state = list.state === "active" ? "archived" : "active";
-        setOwnedLists(lists);
+
+        updateList(listId, list).then(()=>{
+            setOwnedLists(lists);
+        });
     }
 
     const onListAdd = (list: ShoppingList) => {
@@ -62,6 +66,7 @@ export default function ListOverview() {
 
     }
 
+    console.debug(ownedLists);
     const filteredLists = ownedLists.filter((it)=>{
         switch (listFilter) {
             case "all":

@@ -11,8 +11,8 @@ import {Modal} from "@/src/modules/modal/Modal";
 interface ListCardProps {
     list: ShoppingList,
     loggedInUser: User,
-    onListDelete: (listId: number)=>void;
-    onListArchive: (listId: number)=>void;
+    onListDelete: (listId: string)=>void;
+    onListArchive: (listId: string)=>void;
 }
 
 export function ListCard({list, loggedInUser, onListDelete, onListArchive}: ListCardProps) {

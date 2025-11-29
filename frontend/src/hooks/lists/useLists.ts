@@ -10,7 +10,7 @@ export function useLists() {
 
 
         const fetchShoppingList = async () => {
-            const response = await fetch(`http://localhost:3000/shoppingList/`);
+            const response = await fetch(`http://localhost:8000/shoppingList/`);
             const data = await response.json();
             setData(data);
         };
@@ -27,7 +27,7 @@ export function useLists() {
 
     const addList = async (list: ShoppingList) => {
         try {
-            const response = await fetch('http://localhost:3000/shoppingList', {
+            const response = await fetch('http://localhost:8000/shoppingList', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -46,8 +46,9 @@ export function useLists() {
 
     const deleteList = async (listId: string) => {
         try {
-            const response = await fetch(`http://localhost:3000/shoppingList/${listId}`, {
+            const response = await fetch(`http://localhost:8000/shoppingList/${listId}`, {
                 method: 'DELETE',
+
             });
 
             if (response.ok) {
@@ -59,12 +60,32 @@ export function useLists() {
         }
     }
 
+    const updateList = async (listId: string, shoppingList: ShoppingList) => {
+        try {
+            const response = await fetch(`http://localhost:8000/shoppingList/${listId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({...shoppingList, _id: listId}),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('List deleted');
+            }
+        } catch (error) {
+            console.error('Error updating list:', error);
+        }
+    }
+
     return {
         data,
         setData,
         loading,
         error,
         addList,
-        deleteList
+        deleteList,
+        updateList
     }
 }

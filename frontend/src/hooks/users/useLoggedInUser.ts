@@ -10,7 +10,7 @@ export function useLoggedInUser() {
 
     useEffect(() => {
         const fetchShoppingList = async () => {
-            const response = await fetch(`http://localhost:3000/users/691b366b2774443334e5e0cd`);
+            const response = await fetch(`http://localhost:8000/users/691b366b2774443334e5e0cd`);
             const data = await response.json();
             console.debug(data);
             setData(data);

@@ -13,9 +13,12 @@ export function useList(listId: string) {
     useEffect(() => {
 
         const fetchShoppingList = async () => {
-            const response = await fetch(`http://localhost:3000/shoppingList/${listId}`);
+            const response = await fetch(`http://localhost:8000/shoppingList/${listId}`);
+
+            console.debug(response);
             const data = await response.json();
             setData(data);
+
         };
 
         fetchShoppingList().catch((e)=> {

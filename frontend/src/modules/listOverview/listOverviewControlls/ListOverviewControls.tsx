@@ -5,6 +5,7 @@ import React, {useState} from "react";
 import {TextInput} from "@/src/modules/input/textInput/TextInput";
 import {EMPTY_SHOPPING_LIST, ShoppingList} from "@/src/types/ShoppingList";
 import {Dropdown} from "@/src/modules/input/dropdown/Dropdown";
+import {generateRandomId} from "@/src/types/supportedIds";
 
 interface ListOverviewControlsProps {
     loggedInUser: User,
@@ -41,7 +42,7 @@ export function ListOverviewControls({loggedInUser, onListAdd, listFilter, setLi
                 onListAdd({
                     ...EMPTY_SHOPPING_LIST,
                     name: newListName,
-                    id: newListId,
+                    id: generateRandomId(),
                 })
                 setAddListModalOpen(false);
                 setNewListId(newListId + 1);

@@ -1,0 +1,86 @@
+{
+  "/users/:userId": {
+    "get": {
+      "_id": "691b366b2774443334e5e0cd",
+      "id": "691b366b2774443334e5e0cd",
+      "name": "testuser"
+    }
+  },
+
+  "/shoppingList": {
+    "get": [{
+        "id": "69207b922f25bf4e99fe4466",
+        "_id": "69207b922f25bf4e99fe4466",
+        "name": "My list",
+        "state": "active",
+        "__v": 0,
+        "users": [
+          {
+            "_id": "691b366b2774443334e5e0cd",
+            "user": {
+              "_id": "691b366b2774443334e5e0cd",
+              "name": "testUser"
+            },
+            "role": "owner"
+          }
+        ],
+        "items": []
+      },
+      {
+        "id": "6921b16ae152cd26ce89a8e3",
+        "_id": "6921b16ae152cd26ce89a8e3",
+        "name": "Debug list",
+        "state": "archived",
+        "__v": 0,
+        "users": [
+          {
+            "_id": "691b366b2774443334e5e0cd",
+            "user": {
+              "_id": "691b366b2774443334e5e0cd",
+              "name": "testUser"
+            },
+            "role": "owner"
+          }
+        ],
+        "items": []
+      }
+      ],
+
+    "post": {
+      "data:": {
+        "message": "Ok"
+      }
+    }
+  },
+  "/shoppingList/:listId": {
+    "get": {
+      "id": "69207b922f25bf4e99fe4466",
+      "_id": "69207b922f25bf4e99fe4466",
+      "name": "My list",
+      "state": "active",
+      "__v": 0,
+      "users": [
+        {
+          "_id": "691b366b2774443334e5e0cd",
+          "user": {
+            "_id": "691b366b2774443334e5e0cd",
+            "name": "testUser"
+          },
+          "role": "owner"
+        }
+      ],
+      "items": []
+    },
+    "put": {
+      "data": {
+        "message": "Ok"
+      }
+    },
+    "delete": {
+      "data": {
+        "message": "Ok"
+      }
+    }
+
+  }
+}
