@@ -1,5 +1,5 @@
 export interface ShoppingListItem {
-    id: number,
+    id: string,
     name: string,
     quantity: number,
     state: "visible" | "checked",

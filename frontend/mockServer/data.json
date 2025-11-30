@@ -43,7 +43,26 @@
             "role": "owner"
           }
         ],
-        "items": []
+        "items": [
+          {
+            "id": "691b366b2774443334e5e0cd",
+            "name": "Bread",
+            "quantity": 3,
+            "state": "visible"
+          },
+          {
+            "id": "691b366b2774443334e5e0cd",
+            "name": "Milk",
+            "quantity": 1,
+            "state": "visible"
+          },
+          {
+            "id": "691b366b2774443334e5e0cd",
+            "name": "Butter",
+            "quantity": 2,
+            "state": "checked"
+          }
+        ]
       },
       {
         "id": "6921b16ae152cd26ce89a8e3",
@@ -88,7 +107,26 @@
           "role": "owner"
         }
       ],
-      "items": []
+      "items": [
+        {
+          "id": "691b366b2774443334e5e0cd",
+          "name": "Bread",
+          "quantity": 3,
+          "state": "visible"
+        },
+        {
+          "id": "4d8c1454f1c7a5cb86e53608",
+          "name": "Milk",
+          "quantity": 1,
+          "state": "visible"
+        },
+        {
+          "id": "1432a651db7e0abc00268966",
+          "name": "Butter",
+          "quantity": 2,
+          "state": "checked"
+        }
+      ]
     },
     "put": {
       "data": {

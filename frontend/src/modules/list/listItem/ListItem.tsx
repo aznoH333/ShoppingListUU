@@ -3,7 +3,7 @@ import styles from './ListItem.module.css';
 import {Button} from "@/src/modules/input/button/Button";
 
 export interface ShoppingListItem {
-    id: number;
+    id: string;
     name: string;
     quantity: number;
     state: "visible" | "checked";
@@ -11,7 +11,7 @@ export interface ShoppingListItem {
 
 interface ShoppingListItemProps {
     listItem: ShoppingListItem;
-    checkButtonClicked?: (id: number) => void;
+    checkButtonClicked?: (id: string) => void;
 }
 
 export function ListItem({ listItem, checkButtonClicked }: ShoppingListItemProps) {

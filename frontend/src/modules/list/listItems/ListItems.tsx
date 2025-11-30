@@ -12,8 +12,8 @@ import {TextInput} from "@/src/modules/input/textInput/TextInput";
 import {NumberInput} from "@/src/modules/input/numberInput/NumberInput";
 import {getUserRightsForAList} from "@/src/types/ShoppingListUser";
 import {User} from "@/src/types/User";
-import {List} from "postcss/lib/list";
 import {Dropdown} from "@/src/modules/input/dropdown/Dropdown";
+import {generateRandomId} from "@/src/types/supportedIds";
 
 
 interface ListItemsProps {
@@ -42,11 +42,7 @@ export function ListItems({loggedInUser, list, updateList}: ListItemsProps) {
             return;
         }
 
-        const newId = list.items.length > 0 ?
-            list.items
-                .map((it)=>it.id)
-                .reduce((a, acc)=>Math.max(a, acc)) + 1
-            : 0;
+        const newId = generateRandomId()
 
         updateList({
             ...list,
@@ -61,7 +57,7 @@ export function ListItems({loggedInUser, list, updateList}: ListItemsProps) {
         setNewItemModalOpen(false);
     }
 
-    const toggleItemState = (id: number) => {
+    const toggleItemState = (id: string) => {
         const item = list.items.find((it)=>it.id === id);
 
         if (item === undefined) {

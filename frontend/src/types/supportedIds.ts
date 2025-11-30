@@ -8,15 +8,13 @@ export const supportedIds = [
     "d937d1411d08c6164390a0b6",
     "7d6433a6d2fa7763085c3350",
 ];
+// this bs is here due to static page exports.
+// could be deleted if a static export wasn't a requirement
 
 
-let nextIdIndex = 0;
-
-// TODO : this is dead code and can be safely deleted
 export function generateRandomId() {
-    const out = supportedIds[nextIdIndex];
-    nextIdIndex = (nextIdIndex + 1) % 8;
-
-    return out;
+    return "000000000000000000000000".replace(/[018]/g, c =>
+        (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
+    );
 }
 

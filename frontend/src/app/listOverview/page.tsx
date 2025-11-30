@@ -68,7 +68,6 @@ export default function ListOverview() {
 
     }
 
-    console.debug(ownedLists);
     const filteredLists = ownedLists.filter((it)=>{
         switch (listFilter) {
             case "all":

@@ -17,7 +17,6 @@ export function useList(listId: string) {
         const fetchShoppingList = async () => {
             const response = await fetch(`http://localhost:8000/shoppingList/${listId}`);
 
-            console.debug(response);
             const data = await response.json();
             setData(data);
 
@@ -42,7 +41,9 @@ export function useList(listId: string) {
                 return
             }
 
-            updateList(list.id, list).then(()=>{
+            updateList(list.id, list).catch((e)=>{
+                console.error(e);
+            }).then(()=>{
                 setData(list);
             })
         },

@@ -36,7 +36,6 @@ export const EMPTY_SHOPPING_LIST: ShoppingList = {
 
 export function shoppingListGetUserAsListUser(user: User, shoppingList: ShoppingList): ShoppingListUser | undefined {
 
-    console.debug(user);
 
     return shoppingList.users.find((it)=> it.user._id === user._id );
 }

@@ -6,7 +6,7 @@ import {Button} from "@/src/modules/input/button/Button";
 
 interface ShoppingItemListProps {
     items: ShoppingListItem[];
-    checkButtonClicked?: (id: number) => void;
+    checkButtonClicked?: (id: string) => void;
 }
 
 export function ShoppingItemList({ items, checkButtonClicked }: ShoppingItemListProps) {

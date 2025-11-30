@@ -1,6 +1,9 @@
 import {ShoppingList} from "@/src/types/ShoppingList";
 
 export function useListOperations() {
+
+
+
     const addList = async (list: ShoppingList) => {
         try {
             const response = await fetch('http://localhost:8000/shoppingList', {
@@ -17,6 +20,8 @@ export function useListOperations() {
             }
         } catch (error) {
             console.error('Error adding list:', error);
+            throw error;
+
         }
     }
 
@@ -33,6 +38,8 @@ export function useListOperations() {
             }
         } catch (error) {
             console.error('Error deleting list:', error);
+            throw error;
+
         }
     }
 
@@ -52,11 +59,12 @@ export function useListOperations() {
             }
         } catch (error) {
             console.error('Error updating list:', error);
+            throw error;
         }
     }
     return {
         addList,
         updateList,
-        deleteList
+        deleteList,
     }
 }
