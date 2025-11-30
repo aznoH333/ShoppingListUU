@@ -6,6 +6,25 @@
       "name": "testuser"
     }
   },
+  "/users/": {
+    "get": [
+      {
+        "_id": "691b366b2774443334e5e0cd",
+        "id": "691b366b2774443334e5e0cd",
+        "name": "testuser"
+      },
+      {
+        "_id": "6921aae96ce0c7bc85e06e5f",
+        "id": "6921aae96ce0c7bc85e06e5f",
+        "name": "John Doe"
+      },
+      {
+        "_id": "6921abe96ce0c7bc85e06e5f",
+        "id": "6921aab96ce0c7bc85e06e5f",
+        "name": "Jane Doe"
+      }
+    ]
+  },
 
   "/shoppingList": {
     "get": [{

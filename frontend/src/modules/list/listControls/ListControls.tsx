@@ -9,6 +9,7 @@ import {TextInput} from "@/src/modules/input/textInput/TextInput";
 import {UserList, UserListButton} from "@/src/modules/user/userList/UserList";
 import {useApplicationUsers} from "@/src/hooks/users/useApplicationUsers";
 import {getUserRightsForAList} from "@/src/types/ShoppingListUser";
+import {LoadingCard} from "@/src/modules/loadingCard/LoadingCard";
 
 interface ListControlsProps {
     loggedInUser: User,
@@ -18,7 +19,9 @@ interface ListControlsProps {
 
 export function ListControls({loggedInUser, list, updateList}: ListControlsProps){
     const listUser = shoppingListGetUserAsListUser(loggedInUser, list);
-    const users = useApplicationUsers().get();
+    const {data: users, loading, error} = useApplicationUsers();
+
+
 
 
 
@@ -78,6 +81,12 @@ export function ListControls({loggedInUser, list, updateList}: ListControlsProps
             function: removeUserFromList,
             dontShowForUsers: [listUser?._id ?? ""]
         } : undefined
+
+
+    if (loading || error) {
+        return <LoadingCard error={error} heightPx={224}/>
+    }
+
 
     return <Card>
         <div className={styles.header}>

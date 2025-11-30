@@ -1,5 +1,6 @@
 import {ShoppingList} from "@/src/types/ShoppingList";
 import {useEffect, useState} from "react";
+import {useListOperations} from "@/src/hooks/lists/useListOperations";
 
 
 export function useList(listId: string) {
@@ -8,6 +9,7 @@ export function useList(listId: string) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | undefined>(undefined);
 
+    const {updateList} = useListOperations();
 
 
     useEffect(() => {
@@ -35,7 +37,15 @@ export function useList(listId: string) {
 
     return {
         data,
-        setData,
+        update: (list: ShoppingList | undefined)=> {
+            if (!list) {
+                return
+            }
+
+            updateList(list.id, list).then(()=>{
+                setData(list);
+            })
+        },
         loading,
         error
     }
@@ -43,10 +53,4 @@ export function useList(listId: string) {
 
 
 
-    return {
-        data,
-        update: (list: ShoppingList) => {
-            setData(list); // TODO : api call
-        }
-    }
 }
