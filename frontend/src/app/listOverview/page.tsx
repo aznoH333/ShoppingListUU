@@ -8,12 +8,14 @@ import {ListOverviewControls} from "@/src/modules/listOverview/listOverviewContr
 import {useState} from "react";
 import {useLists} from "@/src/hooks/lists/useLists";
 import {LoadingCard} from "@/src/modules/loadingCard/LoadingCard";
+import {useListOperations} from "@/src/hooks/lists/useListOperations";
 
 
 export default function ListOverview() {
     const loggedInUser = useLoggedInUser();
 
-    const {data: ownedLists, setData: setOwnedLists, error, loading, addList, deleteList, updateList} = useLists();
+    const {data: ownedLists, setData: setOwnedLists, error, loading, } = useLists();
+    const {addList, deleteList, updateList} = useListOperations();
 
     const [listFilter, setListFilter] = useState<"all" | "archived" | "active">("all");
 
