@@ -22,7 +22,7 @@ export function ListItem({ listItem, checkButtonClicked }: ShoppingListItemProps
                 <div className={styles.quantity}>{listItem.quantity}x</div>
             </div>
             {checkButtonClicked && (
-                <Button onClick={()=>{checkButtonClicked(listItem.id)}}>
+                <Button onClick={()=>{checkButtonClicked(listItem.id)}} type={listItem.state === "checked" ? "faded" : "active"}>
                     {listItem.state === "checked" ? "Revert" : "Done"}
                 </Button>
             )}

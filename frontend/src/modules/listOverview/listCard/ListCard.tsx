@@ -43,13 +43,13 @@ export function ListCard({list, loggedInUser, onListDelete, onListArchive}: List
                 {userRights.canArchiveList && list.state !== "archived" && (
                     <Button onClick={() => {
                         setArchiveModalOpen(true);
-                    }}>Archive</Button>
+                    }} type={"faded"}>Archive</Button>
                 )}
 
                 {userRights.canDeleteList && list.state !== "archived"  && (
                     <Button onClick={() => {
                         setDeleteModalOpen(true)
-                    }}>Delete</Button>
+                    }} type={"faded"}>Delete</Button>
                 )}
 
             </div>
@@ -67,7 +67,7 @@ export function ListCard({list, loggedInUser, onListDelete, onListArchive}: List
                 onListArchive(list.id);
                 setArchiveModalOpen(false);
             }
-        }>
+        } confirmButtonStyle={"warning"}>
             Are you sure you want to archive {list.name}?
         </Modal>
 
@@ -76,7 +76,7 @@ export function ListCard({list, loggedInUser, onListDelete, onListArchive}: List
             onListDelete(list.id);
             setDeleteModalOpen(false);
         }
-        }>
+        } confirmButtonStyle={"warning"}>
             Are you sure you want to delete {list.name}?
         </Modal>
     </div>

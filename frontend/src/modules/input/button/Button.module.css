@@ -9,7 +9,18 @@
     background-color: var(--color-primary);
     color: var(--color-background);
     cursor: pointer;
+}
 
+.faded {
+    background-color: var(--color-muted-2);
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+.warning {
+    background-color: var(--color-error);
+    color: var(--color-background);
+    cursor: pointer;
 }
 
 .disabled {
